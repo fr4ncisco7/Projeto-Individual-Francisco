@@ -30,7 +30,7 @@ Meu nome é Eloisa Borges Lima, sou estudante de medicina na Idomede, tenho 18 a
 
 <div align="center">
   <sub>Persona Eloisa Borges Lima</sub><br>
-  <img src="../assets/persona.jpg" width="80%">
+  <img src="assets/persona.jpg" width="50%">
 </div>
 
 Necessidades: Eloísa precisa conseguir estudar quando chega da faculdade.
