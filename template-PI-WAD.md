@@ -18,24 +18,57 @@
 
 ## <a name="c1"></a>1. Introdução (Semana 01)
 
-*Preencha com até 300 palavras – sem necessidade de fonte.*
-*Descreva brevemente o sistema que você irá desenvolver.*
+Em um prédio estudantil chamado "Arara Azul", há diversas salinhas de estudo que são disponibilizadas para os moradores. Entretanto, devido à desorganização do prédio e à falta de regras claras, há diversos conflitos entre as pessoas, como moradores que deixam suas coisas nas salinhas e não voltam, além de pessoas que passam muito tempo sem deixar outras usarem. Com isso, o prédio Arara Azul decidiu entrar em contato com Francisco, aluno do Inteli, para que ele conseguisse resolver aquele problema. Assim, Francisco observou a necessidade de criar uma plataforma com um sistema de agendamento para as salas de estudo, com horários bem definidos, certas limitações de agendamento sucessivos e com as regras do espaço para que todos os moradores conseguissem usar sem nenhum conflito .
 
 ---
 
 ## <a name="c2"></a>2. Visão Geral da Aplicação Web
 
 ### 2.1. Personas (Semana 01)
+## Sobre
+Meu nome é Eloisa Borges Lima, sou estudante de medicina na Idomede, tenho 18 anos e sou natural de Caririaçu, Ceará. Sou uma pessoa dedicada, esforçada e muito organizada; gosto de planejar toda a minha rotina, mas estou preparada para imprevistos. Atualmente, estou morando na cidade de Juazeiro do Norte porque estou em busca de realizar o meu sonho de me tornar médica. Por questões de distância, tive que procurar um prédio perto da faculdade, e foi assim que conheci o prédio Arara Azul, um prédio universitário muito acolhedor e com uma estrutura de ponta toda preparada para estudantes. Entretanto, mal organizado, e com isso estou pensando em mudar de prédio.
 
-*Posicione aqui sua(s) Persona(s) em forma de texto markdown com imagens, ou como imagem de template preenchido. Atualize esta seção ao longo do módulo se necessário.*
+<div align="center">
+  <sub>Persona Eloisa Borges Lima</sub><br>
+  <img src="../assets/persona.jpg" width="80%">
+</div>
+
+Necessidades: Eloísa precisa conseguir estudar quando chega da faculdade.
+
+Dores: Ao chegar da faculdade às 16h, ela corre para tentar pegar uma salinha de estudo e, ao chegar lá, encontra o seguinte cenário: algumas pessoas estão na mesma sala desde o meio-dia, outras estão usando o espaço para jogar jogos eletrônicos, e as demais salinhas estão cheias de mochilas e cadernos, mas sem nenhuma pessoa dentro. Nesse cenário, ela não consegue realizar seus estudos, nem individualmente nem em grupo, o que prejudica os encontros marcados com suas amigas e está afetando diretamente suas notas.
+
+Solução: Com a solução e implementação do sistema de agendamento das salinhas de estudo, proposta por Francisco, os alunos só poderão acessar esses espaços mediante agendamento, com bloqueio de agendamentos sucessivos por uma mesma pessoa. Dessa forma, Eloísa conseguirá reservar seu horário na sala de estudos com antecedência. Assim, ela não terá pressa para voltar da faculdade, terá privacidade para estudar, um espaço para estudo coletivo e para tirar dúvidas com as amigas, além de aumentar sua satisfação com o prédio Arara Azul.
 
 ### 2.2. User Stories (Semana 01)
 
-*Posicione aqui a lista de User Stories levantadas para o projeto. Siga o template de User Stories e utilize a referência USXX para numeração (US01, US02, US03, ...). Indique todas as User Stories mapeadas, mesmo aquelas que não forem implementadas ao longo do projeto. Não se esqueça de explicar o INVEST de 1 User Storie prioritária.*
+US01- Como moradora, eu quero poder ver eventos que irão interditar as salas para que eu consiga organizar minha rotina.
+
+US02- Como moradora, eu quero que na plataforma indique boas práticas de cuidado com a sala agendada para que não prejudique a experiência do próximo.
+
+US03- Como uma estudante de medicina e moradora do prédio, quero poder ver os horários disponível de agendamento das salinhas particulares para que eu consiga organizar meus estudos.
+
+## Método INVEST
+Em termos gerais o método INVEST é muito utilizado na metodologia agil para analisar a qualidade de uma user story com critérios de avaliação para garantir que as histórias estejam bem escritas e eficar para o planejamento e desenvolvimento. INVEST(Independent, Negotiable, Valuable, Estimable, Small, Testable).
+
+Ele fornece um conjunto de critérios para garantir que as histórias de usuário sejam bem escritas e eficazes para o planejamento e desenvolvimento. Cada letra do acrônimo representa uma característica importante que uma boa User Story deve ter:
+
+I -  A user story por si só já possui uma história independente, com ela tenho informações que a pessoa é uma estudante e moradora de um prédio e que busca horários de agendamento disponíveis das salas de estudos para melhorar e organizar o seu aprendizado. Pode haver dependências da infraestrutura básica (existência das salas, sistema de login), mas a história em si parece independente dessas camadas subjacentes.
+
+N - A história apresentada é negociável, porque ela é suficientemente genérica, não há nada definido ou fixo, por isso é perfeita para que seja debatida e definida a melhor abordagem pela a equipe de desenvolvimento.
+
+V - A história de usuário criada é extremamente valiosa, porque ela é um passo importante para conclusão e resolução diretamente das dores da personagem, a solução proposta na persona detalha o valor que essa funcionalidade trará.
+
+E - Com as informações da história e o contexto do problema, esse User Story é altamente estimável. A equipe de desenvolvimento deverá analisar, planejar e definir a abordagem que será utilizada para que a estimativa seja feita.
+
+S - Representa a funcionalidade específica de visualizar os horários disponíveis para agendamento das salinhas particulares. Ela representa um parte específica e importante do sistema completo, é um tarefa que pode ser incrementada em uma única sprint.
+
+A implementação dessa funcionalidade pode envolver diversas tarefas complexas. Para garantir que o trabalho seja gerenciável e entregue valor incrementalmente em cada sprint, pode ser necessário dividir essa história em histórias menores e mais focadas, como a capacidade de visualizar a disponibilidade das salas, a ação de agendar um horário específico e a funcionalidade de cancelar um agendamento.
+
+T - Ela é testável, os critérios de aceite podem ser definidos claramente a partir da história e das dores de Eloísa. Por exemplo: A estudante deve conseguir selecionar uma data e hora para agendar uma salinha., Outros moradores devem poder visualizar os horários agendados (dependendo dos requisitos).
 
 ---
 
-## <a name="c3"></a>3. Projeto da Aplicação Web
+##  Projeto da Aplicação Web
 
 ### 3.1. Modelagem do banco de dados  (Semana 3)
 
