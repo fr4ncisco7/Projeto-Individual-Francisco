@@ -96,7 +96,7 @@ T - Ela é testável, os critérios de aceite podem ser definidos claramente a p
 **User Storie:** Não está associada a nenhuma US.
 <div align="center">
   <sub>Wireframe tela 1</sub><br>
-  <img src="assets/Tela1.png" width="50%">
+  <img src="assets/Tela1.png" width="20%">
 </div>
 
 <p>A tela de login é essencial para o acesso dos moradores à plataforma de agendamento das salas de estudo do prédio. O e-mail cadastrado no sistema do edifício deve ser utilizado para entrar.
@@ -106,8 +106,8 @@ T - Ela é testável, os critérios de aceite podem ser definidos claramente a p
 **User Storie:** 
 - "Como uma estudante de medicina e moradora do prédio, quero poder ver os horários disponível de agendamento das salinhas particulares para que eu consiga organizar meus estudos."
 <div align="center">
-  <sub>Wireframe tela 1</sub><br>
-  <img src="assets/Tela2.png" width="50%">
+  <sub>Wireframe tela 2</sub><br>
+  <img src="assets/Tela2.png" width="20%">
 </div>
 
 <p>A tela de agendamento é fundamental para otimizar a experiência dos estudantes nos espaços de estudo, pois permite visualizar os dias com os horários disponíveis, selecionar a sala desejada e agendar horários com bastante antecedência. Observa-se que os horários são marcados de 4 em 4 horas, um tempo perfeito para estudar todo o conteúdo com amigos ou individualmente. Dessa forma, soluciona completamente a questão levantada, pois resolve com eficiência a demanda da Eloisa de ver os dias e horários livres das salinhas de estudo, que ficam visíveis na parte inferior do wireframe (horários sem marcação).
@@ -119,7 +119,7 @@ T - Ela é testável, os critérios de aceite podem ser definidos claramente a p
 - "Como moradora, eu quero poder ver eventos que irão interditar as salas para que eu consiga organizar minha rotina".
 <div align="center">
   <sub>Wireframe tela 3</sub><br>
-  <img src="assets/Tela3.png" width="50%">
+  <img src="assets/Tela3.png" width="20%">
 </div>
 
 <p>A tela de confirmação é um passo importante para nossa plataforma. Nela, é possível visualizar a data, o horário, as regras de uso e os eventos que poderiam interditar a sala de estudo. Desse modo, soluciona com clareza as dúvidas da Eloisa sobre possíveis interdições das salinhas, como uma detetização, e as normas de convivência do local.
