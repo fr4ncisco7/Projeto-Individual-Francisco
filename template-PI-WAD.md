@@ -72,9 +72,16 @@ T - Ela é testável, os critérios de aceite podem ser definidos claramente a p
 
 ### 3.1. Modelagem do banco de dados  (Semana 3)
 
-*Posicione aqui os diagramas de modelos relacionais do seu banco de dados, apresentando todos os esquemas de tabelas e suas relações. Utilize texto para complementar suas explicações, se necessário.*
+### Modelo lógico do banco de dados
+<div align="center">
+  <sub></sub><br>
+  <img src="assets/modeloLogico.png" width="50%">
+</div>
 
-*Posicione também o modelo físico com o Schema do BD (arquivo .sql)*
+### Modelo físico do banco de dados
+
+[Clique aqui para acessar o modelo físico do banco de dados](migrations/init.sql)
+
 
 ### 3.1.1 BD e Models (Semana 5)
 *Descreva aqui os Models implementados no sistema web*

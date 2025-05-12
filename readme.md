@@ -1,6 +1,6 @@
 # Boilerplate MVC em Node.js com PostgreSQL
 
-Este projeto é um boilerplate básico para uma aplicação Node.js seguindo o padrão MVC (Model-View-Controller), utilizando PostgreSQL como banco de dados.
+Este projeto é uma plataforma de agendamento de salas de estudo feita para os moradores do prédio Arara Azul. Nela, é possível ver as salas disponíveis, verificar se há algum evento que possa interditar o acesso, consultar os horários e dicas de boas práticas do ambiente. Tudo isso porque conta com um banco de dados completo trabalhando para gerar a melhor experiência de funcionamento e de uso para o usuário.
 
 ## Requisitos
 
@@ -12,8 +12,8 @@ Este projeto é um boilerplate básico para uma aplicação Node.js seguindo o p
 1. **Clonar o repositório:**
 
 ```bash
-   git clone https://github.com/seu-usuario/seu-projeto.git
-   cd seu-projeto
+   git clone https://github.com/fr4ncisco7/Projeto-Individual-Francisco
+   cd Projeto-Individual-Francisco
 ```
 
 2. **Instalar as dependências:**

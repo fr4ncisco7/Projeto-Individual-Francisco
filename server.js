@@ -15,8 +15,7 @@ app.listen(PORT, () => {
 });
 
 require('dotenv').config();
-const express = require('express');
-const db = require('./config/db');
+const db = require('./config/db')
 const path = require('path');
 
 app.set('view engine', 'ejs');
