@@ -2,9 +2,9 @@
 
 **_Os trechos em itálico servem apenas como guia para o preenchimento da seção. Por esse motivo, não devem fazer parte da documentação final._**
 
-## Nome do Projeto
+## Sistema online para reservar salas de estudo no Edifício Arara Azul.
 
-#### Autor do projeto
+#### Francisco de Araujo Ferreira Filho
 
 ## Sumário
 

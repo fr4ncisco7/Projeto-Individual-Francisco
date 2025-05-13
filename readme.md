@@ -9,12 +9,13 @@ Este projeto é uma plataforma de agendamento de salas de estudo feita para os m
 
 ## Instalação
 
-1. **Clonar o repositório:**
+### Como execultar o projeto localmente:
+1. **Abra o seu terminal Bash e clone o repositório:**
 
 ```bash
    git clone https://github.com/fr4ncisco7/Projeto-Individual-Francisco
-   cd Projeto-Individual-Francisco
 ```
+
 
 2. **Instalar as dependências:**
     
@@ -22,17 +23,36 @@ Este projeto é uma plataforma de agendamento de salas de estudo feita para os m
 npm install
 ```
     
-3. **Configurar o arquivo `.env`:**
-    
-Renomeie o arquivo `.env.example` para `.env` e configure as variáveis de ambiente necessárias, como as configurações do banco de dados PostgreSQL.
-    
+3. **Configure as variáveis de ambiente:**
+```bash   
+Mudar o nome do arquivo: Pegue esse arquivo .env.example e renomeie-o para .env. Basicamente, você está removendo o ".example" do nome.
+```
+
+4. **Iniciar o servidor:**
+
+```bash
+npm install
+```
+ou
+```bash
+node server.js
+```
+
+OBS: A porta desse servidor foi alterada para 8080
+
+4. **Acesse o servidor:**
+```bash
+http://localhost:8080
+```
+
+
 
 Configuração do Banco de Dados
 ------------------------------
 
 1. **Criar banco de dados:**
     
-    Crie um banco de dados PostgreSQL com o nome especificado no seu arquivo `.env`.
+    Certifique-se de que existe um banco de dados PostgreSQL com o nome definido no seu arquivo .env.
     
 2. **Executar o script SQL de inicialização:**
     
@@ -63,13 +83,40 @@ Scripts Disponíveis
 Estrutura de Diretórios
 -----------------------
 
-* **`config/`**: Configurações do banco de dados e outras configurações do projeto.
-* **`controllers/`**: Controladores da aplicação (lógica de negócio).
-* **`models/`**: Modelos da aplicação (definições de dados e interações com o banco de dados).
-* **`routes/`**: Rotas da aplicação.
-* **`tests/`**: Testes automatizados.
-* **`views/`**: Views da aplicação (se aplicável).
+* **`config/`** -> `database.js`: Configurações do banco de dados e outras configurações do projeto. 
 
+
+* **`controllers/`** -> `HomeController.js`: Controladores da aplicação (lógica de negócio). -> 
+
+* **`models/`** -> `User.js`: Modelos da aplicação (definições de dados e interações com o banco de dados). 
+
+* **`routes/`** -> `index.js`: Rotas da aplicação. 
+
+* **`services/`** -> `userService.js`: TServiços auxiliares do sistema. 
+
+* **`assets/ `**: Arquivos públicos como imagens e fontes.
+
+* **`scripts/  `**: Arquivos de JavaScript públicos.
+
+* **`styles/ `**: Arquivos CSS públicos.
+
+* **`tests/ `** -> `example.test.js`: Arquivos de testes unitários. 
+
+* **`.gitignore  `**: Arquivo para ignorar arquivos no Git.
+
+* **`.env `**: Arquivo de exemplo para variáveis de ambient.
+
+* **`jest.config.js  `**: Arquivo de configuração do Jest
+
+* **`package-lock.json  `**: Gerenciador de dependências do Node.js
+
+* **`package.json  `**: Gerenciador de dependências do Node.js
+
+* **`readme.md  `**: Documentação do projeto (Markdown).
+
+* **`server.js  `**: Arquivo principal que inicializa o servidor.
+
+* **`srest.http  `**: Teste de endpoints.
 Contribuição
 ------------
 
