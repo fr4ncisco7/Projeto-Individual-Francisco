@@ -24,9 +24,9 @@ npm install
 ```
     
 3. **Configure as variáveis de ambiente:**
-```bash   
+
 Mudar o nome do arquivo: Pegue esse arquivo .env.example e renomeie-o para .env. Basicamente, você está removendo o ".example" do nome.
-```
+
 
 4. **Iniciar o servidor:**
 
