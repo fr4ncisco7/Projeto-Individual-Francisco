@@ -1,14 +1,12 @@
+// routes/index.js
 const express = require('express');
 const router = express.Router();
+const TarefaController = require('../controllers/TarefaController');
 
-// Defina suas rotas aqui
-router.get('/', (req, res) => {
-  res.send('Bem-vindo à sua aplicação!');
-});
-
-// Exemplo de outra rota
-router.get('/api/data', (req, res) => {
-  res.json({ message: 'Dados da API' });
-});
+// Rotas para o CRUD de tarefas
+router.post('/tarefas', TarefaController.criarTarefa);
+router.get('/tarefas', TarefaController.listarTarefas);
+router.put('/tarefas/:id', TarefaController.editarTarefa);
+router.delete('/tarefas/:id', TarefaController.excluirTarefa);
 
 module.exports = router;
