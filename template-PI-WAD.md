@@ -249,28 +249,14 @@ Aplicativo mobile para reserva de salas de estudo do prédio **Arara Azul**, exc
 
 
 
-### 3.5. Protótipo de alta fidelidade (Semana 05)
+### 3.5. Protótipo de Alta Fidelidade (Semana 05)
 
+| Tela de Login | Tela de Agendamento | Tela de Confirmação |
+| :------------: | :------------------: | :-----------------: |
+| ![Tela 1](assets/altaTela1.png) | ![Tela 2](assets/altaTela2.png) | ![Tela 3](assets/altaTela3.png) |
 
-### **Tela de login**
-<div align="center">
-  <sub>Protótipo de alta fidelidade.</sub><br>
-  <img src="assets/altaTela1.png" width="20%">
-</div>
+🔗 **Link do Figma:** [Acessar protótipo](https://www.figma.com/design/6vGv5QEdLNycb3QFHrQ7h8/Untitled?node-id=0-1&t=BKp1rVrURdjMeIUL-1)
 
-### **Tela de agendamento**
-<div align="center">
-  <sub>Protótipo de alta fidelidade.</sub><br>
-  <img src="assets/altaTela2.png" width="20%">
-</div>
-
-### **Tela de confirmação de reserva**
-<div align="center">
-  <sub>Protótipo de alta fidelidade.</sub><br>
-  <img src="assets/altaTela3.png" width="20%">
-</div>
-
-#### **link do figma:** https://www.figma.com/design/6vGv5QEdLNycb3QFHrQ7h8/Untitled?node-id=0-1&t=BKp1rVrURdjMeIUL-1
 
 ### 3.6. WebAPI e endpoints (Semana 05)
 
