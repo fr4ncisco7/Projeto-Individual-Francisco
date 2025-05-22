@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestão de Usuários e Salas</title>
+</head>
+<body>
+  <h1>Usuários Cadastrados</h1>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Sala</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% usuarios.forEach(usuario => { %>
+        <tr>
+          <td><%= usuario.nome %></td>
+          <td><%= usuario.email %></td>
+          <td><%= usuario.sala || "Sem sala" %></td>
+          <td>
+            <form action="/usuarios/delete/<%= usuario.id %>" method="POST" style="display:inline;">
+              <button type="submit">Deletar</button>
+            </form>
+            <form action="/usuarios/edit/<%= usuario.id %>" method="POST" style="display:inline;">
+              <input name="nome" placeholder="Novo nome" required />
+              <input name="email" placeholder="Novo email" required />
+              <button type="submit">Editar</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+
+  <h2>Cadastrar Novo Usuário</h2>
+  <form action="/usuarios" method="POST">
+    <input name="nome" placeholder="Nome" required />
+    <input name="email" placeholder="Email" required />
+    <select name="sala_id">
+      <option value="">Selecione uma sala</option>
+      <% salas.forEach(sala => { %>
+        <option value="<%= sala.id %>"><%= sala.nome %></option>
+      <% }); %>
+    </select>
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <hr>
+
+  <h2>Salas Cadastradas</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Nome da Sala</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% salas.forEach(sala => { %>
+        <tr>
+          <td><%= sala.nome %></td>
+          <td>
+            <form action="/salas/delete/<%= sala.id %>" method="POST" style="display:inline;">
+              <button type="submit">Deletar</button>
+            </form>
+            <form action="/salas/edit/<%= sala.id %>" method="POST" style="display:inline;">
+              <input name="nome" placeholder="Novo nome da sala" required />
+              <button type="submit">Editar</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+
+  <h3>Adicionar Nova Sala</h3>
+  <form action="/salas" method="POST">
+    <input name="nome" placeholder="Nome da sala" required />
+    <button type="submit">Cadastrar</button>
+  </form>
+</body>
+</html>

@@ -99,7 +99,7 @@ T - Ela é testável, os critérios de aceite podem ser definidos claramente a p
 
 ### 3.3. Wireframes (Semana 03)
 
-### Tela de login:
+### **Tela de login**
 **User Storie:** Não está associada a nenhuma US.
 <div align="center">
   <sub>Wireframe tela 1</sub><br>
@@ -109,7 +109,7 @@ T - Ela é testável, os critérios de aceite podem ser definidos claramente a p
 <p>A tela de login é essencial para o acesso dos moradores à plataforma de agendamento das salas de estudo do prédio. O e-mail cadastrado no sistema do edifício deve ser utilizado para entrar.
  <p>
 
-### Tela de agendamento:
+### **Tela de agendamento**
 **User Storie:** 
 - "Como uma estudante de medicina e moradora do prédio, quero poder ver os horários disponível de agendamento das salinhas particulares para que eu consiga organizar meus estudos."
 <div align="center">
@@ -120,7 +120,7 @@ T - Ela é testável, os critérios de aceite podem ser definidos claramente a p
 <p>A tela de agendamento é fundamental para otimizar a experiência dos estudantes nos espaços de estudo, pois permite visualizar os dias com os horários disponíveis, selecionar a sala desejada e agendar horários com bastante antecedência. Observa-se que os horários são marcados de 4 em 4 horas, um tempo perfeito para estudar todo o conteúdo com amigos ou individualmente. Dessa forma, soluciona completamente a questão levantada, pois resolve com eficiência a demanda da Eloisa de ver os dias e horários livres das salinhas de estudo, que ficam visíveis na parte inferior do wireframe (horários sem marcação).
 <p>
 
-### Tela de confirmação de reserva:
+### **Tela de confirmação de reserva**
 **User Storie:** 
 - "Como moradora, eu quero que na plataforma indique boas práticas de cuidado com a sala agendada para que não prejudique a experiência do próximo."
 - "Como moradora, eu quero poder ver eventos que irão interditar as salas para que eu consiga organizar minha rotina".
@@ -133,17 +133,144 @@ T - Ela é testável, os critérios de aceite podem ser definidos claramente a p
 
 <p>
 
+#### **link do figma:** https://www.figma.com/design/6vGv5QEdLNycb3QFHrQ7h8/Untitled?node-id=0-1&t=BKp1rVrURdjMeIUL-1
+
 
 
 
 ### 3.4. Guia de estilos (Semana 05)
 
-*Descreva aqui orientações gerais para o leitor sobre como utilizar os componentes do guia de estilos de sua solução.*
+
+##  Guia de Estilo –  Arara Azul (Mobile)
+
+##  Contexto
+Aplicativo mobile para reserva de salas de estudo do prédio **Arara Azul**, exclusivo para estudantes.
+
+---
+
+##  Paleta de Cores
+
+| Função        | Descrição           | HEX      |
+| --------------| -------------------- | -------- |
+| Primária      | Azul Escuro          | `#21006F`|
+| Primária      | Azul Secundário      | `#6135C7`|
+| Secundária    | Branco               | `#FFFAFA`|
+| Secundária    | Preto                | `#000000`|
+| Terciária     | Cinza Claro          | `#D9D9D9`|
+| Terciária     | Cinza Médio          | `#817E7E`|
+| Destaque      | Amarelo (Seleção)    | `#FFF600`|
+
+---
+
+##  Tipografia
+
+- **Fonte:** Inter
+- **Estilo:** Regular
+- **Capitalização:** Primeira letra em maiúsculo nas frases.
+
+###  Tamanhos
+
+| Aplicação               | Tamanho |
+| ------------------------| --------|
+| Títulos                 | 20      |
+| Botões e Informações    | 16      |
+| Avisos e Observações    | 12      |
+
+---
+
+##  Componentes e Elementos Visuais
+
+###  Botões
+- Fundo: `#21006F`, `#6135C7` ou `#000000` (para botões de ação como "Reservar", "Continuar")
+- Texto: `#FFFAFA` (branco) ou `#000000` (preto)
+- Raio (arredondamento): 10px
+- Stroke (borda): Preto (`#000000`), 2px de espessura
+- Sombra:
+  - Offset X: 6
+  - Offset Y: 4
+  - Blur: 4
+  - Spread: 2
+
+###  Caixas (Inputs, Avisos, Informações)
+- Fundo: Branco (`#FFFAFA`) ou Cinza (`#D9D9D9`)
+- Borda: Stroke Preto (`#000000`), 2px
+- Raio: 10px
+- Sombra padrão (X:6, Y:4, Blur:4, Spread:2)
+
+###  Calendário
+- Fundo: Azul Escuro (`#21006F`) ou Azul Secundário (`#6135C7`)
+- Dia Selecionado: Fundo Amarelo (`#FFF600`)
+- Texto: Preto (`#000000`) ou Branco (`#FFFAFA`)
+
+###  Cartões de Sala
+- Fundo: Cinza Claro (`#D9D9D9`)
+- Ícones relacionados a estudo
+- Texto centralizado: "Sala 1", "Sala 2", etc.
+
+---
+
+##  Ícones e Ilustrações
+- Estilo: Flat design (não realista)
+- Temática: Estudos e Arara Azul
+- Paleta de cores seguindo o padrão do app
+- Bordas suaves e harmônicas
+
+---
+
+##  Layout e Grid
+
+- **Tamanho do Frame:** 402x935 px (Mobile)
+- **Grid:**
+  - 6 colunas
+  - Cor do grid: Vermelha
+- **Espaçamento:** 
+  - Segue múltiplos de 8px (recomendado)
+
+---
+
+##  Efeitos (Sombra padrão)
+
+- Offset X: 6
+- Offset Y: 4
+- Blur: 4
+- Spread: 2
+
+---
+
+##  Observações Gerais
+
+- Todos os elementos possuem raio de 10px e borda preta de 2px.
+- Consistência nas sombras e bordas para garantir unidade visual.
+- A estética reflete a identidade do prédio Arara Azul e o foco em ambiente acadêmico.
+
+---
+
+
+
 
 
 ### 3.5. Protótipo de alta fidelidade (Semana 05)
 
-*Posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelidade e o link para acesso ao protótipo completo (mantenha o link sempre público para visualização).*
+
+### **Tela de login**
+<div align="center">
+  <sub>Protótipo de alta fidelidade.</sub><br>
+  <img src="assets/altaTela1.png" width="20%">
+</div>
+
+### **Tela de agendamento**
+<div align="center">
+  <sub>Protótipo de alta fidelidade.</sub><br>
+  <img src="assets/altaTela2.png" width="20%">
+</div>
+
+### **Tela de confirmação de reserva**
+<div align="center">
+  <sub>Protótipo de alta fidelidade.</sub><br>
+  <img src="assets/altaTela3.png" width="20%">
+</div>
+
+#### **link do figma:** https://www.figma.com/design/6vGv5QEdLNycb3QFHrQ7h8/Untitled?node-id=0-1&t=BKp1rVrURdjMeIUL-1
 
 ### 3.6. WebAPI e endpoints (Semana 05)
 
