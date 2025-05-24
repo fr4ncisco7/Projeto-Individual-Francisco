@@ -17,6 +17,6 @@ router.get('/usuarios/:id', UsuarioController.obterUsuario);
 router.post('/usuarios', UsuarioController.criarUsuario);
 router.put('/usuarios/:id', UsuarioController.atualizarUsuario); 
 router.delete('/usuarios/:id', UsuarioController.excluirUsuario);
-//router.patch('/usuarios/:id', UsuarioController.atualizarParcialUsuario); 
+
 
 module.exports = router;

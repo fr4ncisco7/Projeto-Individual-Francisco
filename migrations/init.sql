@@ -30,4 +30,10 @@ CREATE TABLE IF NOT EXISTS salas_agendamentos(
   FOREIGN KEY (agendamentos_id) REFERENCES agendamentos(id)
 );
 
+CREATE TABLE IF NOT EXISTS tarefas (
+  id SERIAL PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  descricao TEXT 
+);
+
 
