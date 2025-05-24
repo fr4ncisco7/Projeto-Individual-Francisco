@@ -15,8 +15,8 @@ router.delete('/tarefas/:id', TarefaController.excluirTarefa);
 router.get('/usuarios', UsuarioController.listarUsuarios);
 router.get('/usuarios/:id', UsuarioController.obterUsuario);
 router.post('/usuarios', UsuarioController.criarUsuario);
-router.put('/usuarios/:id', UsuarioController.atualizarUsuario); // ADICIONE ESTA LINHA
-router.delete('/usuarios/:id', UsuarioController.excluirUsuario); // ADICIONE ESTA LINHA
-// router.patch('/usuarios/:id', UsuarioController.atualizarParcialUsuario); // Se você tiver uma função PATCH
+router.put('/usuarios/:id', UsuarioController.atualizarUsuario); 
+router.delete('/usuarios/:id', UsuarioController.excluirUsuario);
+//router.patch('/usuarios/:id', UsuarioController.atualizarParcialUsuario); 
 
 module.exports = router;

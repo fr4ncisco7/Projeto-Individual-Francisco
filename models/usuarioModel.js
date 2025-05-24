@@ -1,46 +1,57 @@
 // models/usuarioModel.js
-const pool = require('../config/db'); // Verifique se o caminho está correto
 
-async function getAllUsuarios() {
-  const result = await pool.query('SELECT * FROM usuarios');
-  return result.rows;
-}
+// Log para confirmar que este arquivo está sendo carregado
+console.log('--- NOVO usuarioModel.js CARREGADO. Caminho: ' + __filename + ' ---');
 
-async function getUsuarioById(id) {
-  const result = await pool.query('SELECT * FROM usuarios WHERE id = $1', [id]);
-  return result.rows[0];
-}
+const pool = require('../config/db'); // Verifique se o caminho do seu pool está correto
 
-async function createUsuario(usuarioData) {
-  const { nome, email, senha } = usuarioData;
-  const data_cadastro = new Date().toISOString().slice(0, 10);
-  const result = await pool.query(
-    'INSERT INTO usuarios (nome, email, senha, data_cadastro) VALUES ($1, $2, $3, $4) RETURNING *',
-    [nome, email, senha, data_cadastro]
-  );
-  return result.rows[0];
-}
+// Funções placeholder para o teste
+async function getAllUsuarios() { return []; }
+async function getUsuarioById(id) { return null; }
+async function createUsuario(usuarioData) { return null; }
+async function deleteUsuario(id) { return false; }
 
-// *** ADICIONE ESTAS FUNÇÕES ABAIXO ***
 
+// *** FUNÇÃO updateUsuario COM DEPURADOR ***
 async function updateUsuario(id, usuarioData) {
-  const { nome, email, senha } = usuarioData;
-  const result = await pool.query(
-    'UPDATE usuarios SET nome = $1, email = $2, senha = $3 WHERE id = $4 RETURNING *',
-    [nome, email, senha, id]
-  );
-  return result.rows[0]; // Retorna o usuário atualizado ou undefined se não encontrar
-}
+    console.log('Debug: Dentro de updateUsuario. ID recebido:', id, 'Tipo:', typeof id);
+    console.log('Debug: Dados recebidos para update:', usuarioData);
 
-async function deleteUsuario(id) {
-  const result = await pool.query('DELETE FROM usuarios WHERE id = $1 RETURNING id', [id]);
-  return result.rowCount > 0; // Retorna true se deletou algo, false caso contrário
+    const { nome, email, senha } = usuarioData;
+
+    // Se o id não for um número, vamos logar e lançar um erro específico
+    if (isNaN(Number(id))) {
+        const errorMsg = `Erro Crítico: ID (${id}) não é um número válido para atualização. Tipo: ${typeof id}.`;
+        console.error(errorMsg);
+        throw new Error(errorMsg);
+    }
+
+    const query = `
+        UPDATE usuarios
+        SET nome = $1, email = $2, senha = $3
+        WHERE id = $4
+        RETURNING *;
+    `;
+    const params = [nome, email, senha, id];
+
+    console.log('Debug: Query SQL:', query);
+    console.log('Debug: Parâmetros da Query:', params);
+
+    try {
+        // LINHA 28 AGORA É AQUI (ou próxima, dependendo de como você colou)
+        const result = await pool.query(query, params);
+        console.log('Debug: Resultado do update:', result.rows[0]);
+        return result.rows[0]; // Retorna o usuário atualizado ou undefined se não encontrar
+    } catch (error) {
+        console.error('Debug: ERRO NA EXECUÇÃO DO BANCO DE DADOS EM updateUsuario:', error);
+        throw error; // Re-lança o erro para ser capturado no controller
+    }
 }
 
 module.exports = {
-  getAllUsuarios,
-  getUsuarioById,
-  createUsuario,
-  updateUsuario, // Não esqueça de exportar!
-  deleteUsuario, // Não esqueça de exportar!
+    getAllUsuarios,
+    getUsuarioById,
+    createUsuario,
+    updateUsuario,
+    deleteUsuario,
 };
