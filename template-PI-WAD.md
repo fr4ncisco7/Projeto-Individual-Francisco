@@ -160,6 +160,7 @@ Aplicativo mobile para reserva de salas de estudo do prédio **Arara Azul**, exc
 | Terciária     | Cinza Médio          | `#817E7E`|
 | Destaque      | Amarelo (Seleção)    | `#FFF600`|
 
+
 ---
 
 ##  Tipografia
