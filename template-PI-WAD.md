@@ -84,18 +84,76 @@ T - Ela é testável, os critérios de aceite podem ser definidos claramente a p
 
 
 ### 3.1.1 BD e Models (Semana 5)
-*Descreva aqui os Models implementados no sistema web*
+[Clique aqui para acessar a explicação dos models no meu sistema](detalhamento_models.md)
 
 ### 3.2. Arquitetura (Semana 5)
+O esquema de arquitetura MVC (Model-View-Controller) é uma representação visual que ilustra como os diferentes módulos de um software se organizam e interagem, seguindo o padrão MVC. Esse diagrama ajuda a visualizar elementos da aplicação, como as tabelas do banco de dados, seus campos, as operações básicas de dados (Criar, Ler, Atualizar e Excluir), as telas do sistema, as tecnologias empregadas e os caminhos de acesso definidos.
 
-*Posicione aqui o diagrama de arquitetura da sua solução de aplicação web. Atualize sempre que necessário.*
+<div align="center">
+  <sub></sub><br>
+  <img src="assets/diagramaMvc.png" width="100%">
+</div>
 
-**Instruções para criação do diagrama de arquitetura**  
-- **Model**: A camada que lida com a lógica de negócios e interage com o banco de dados.
-- **View**: A camada responsável pela interface de usuário.
-- **Controller**: A camada que recebe as requisições, processa as ações e atualiza o modelo e a visualização.
+### **•View (Visão)**
+Esta primeira área do diagrama representa a Visão, que é a parte da aplicação que o usuário realmente vê e com a qual interage. Ela é responsável por apresentar as informações ao usuário e por capturar suas ações, enviando-as para o Controller. Nesse sentido, nela está contido todas as telas da aplicação web que nesse caso são a tela de login, agendamento e a de confirmação de agendamento. Sendo assim, cada requisição está representada em sua respectiva tela, indicando o que acontecerá nela e qual será o fluxo.
+
+- **Login:** a tela de login tem dois atributos principais, o email e a senha. Quando o usuário colocar o email e a senha, a requisição é mandada para o controller, que por lar ele pede para o model conferir no banco de dados se aquele email e senha existe, ou então cria um email e senha.
+
+
+- **Agendamentos:** a tela de agendamento tem três atributos principais para a seleção: a Sala, o Horário e o Dia. Quando o usuário seleciona esses dados, a requisição é enviada para o Controller de Agendamentos. Este, por sua vez, solicita ao Model de Agendamentos que verifique a disponibilidade da sala, horário e dia no banco de dados. A resposta dessa verificação é então retornada para a View, preparando-se para a etapa de confirmação.
+
+- **Confirmação_Agendamento:** a tela de confirmação de agendamento exibe os detalhes do agendamento previamente selecionado (Sala, Horário, Dia) e adiciona o atributo Dia_agendado (que indica quando a confirmação está sendo feita). É nessa tela que o usuário finaliza o agendamento. Ao confirmar, uma nova requisição é enviada ao Controller de Agendamentos, que então instrui o Model a registrar efetivamente o agendamento no banco de dados. Após a conclusão bem-sucedida dessa operação, o Controller envia uma resposta para a View, indicando que o agendamento foi concluído.
+
+#### **•Controller (Controlador)**
+A área central simboliza o Controlador, que atua como um elo entre a Visão e o Modelo. Sua função é receber as interações da interface, aplicar a lógica de negócios necessária e encaminhá-las ao Modelo. Ele também coordena o retorno das informações processadas de volta para a Visão. Nessa pespectiva, ela representa as tebales que estão no módel e as operações possíveis de serem realizadas.
+
+**Usuários (Controller):** O Controller de Usuários é responsável por gerenciar as operações relacionadas aos dados dos usuários. Ele recebe requisições da View (como a tela de Login) para:
+
+- Selecionar: Verificar a existência de um usuário e suas credenciais no Model de Usuários (comunicando-se com a tabela de Usuários no banco de dados).
+- Criar: Inserir um novo registro de usuário no Model de Usuários (adicionar um novo usuário ao banco).
+- Atualizar: Modificar informações de um usuário existente no Model de Usuários.
+- Deletar: Remover um registro de usuário do Model de Usuários. Ele coordena com o Model de Usuários para realizar essas operações e envia as respostas apropriadas de volta para a View.
+
+**Salas (Controller):** O Controller de Salas é encarregado das operações de gerenciamento das salas. Ele recebe requisições para:
+
+- Selecionar: Consultar informações sobre as salas disponíveis no Model de Salas (como nome, capacidade e disponibilidade).
+- Criar: Adicionar novos registros de salas no Model de Salas.
+ -Atualizar: Modificar os detalhes de salas existentes no Model de Salas.
+- Deletar: Remover registros de salas do Model de Salas. Este Controller interage diretamente com o Model de Salas para obter ou modificar os dados e retorna os resultados para as Views que precisam dessas informações.
+
+**Agendamentos (Controller):** O Controller de Agendamentos é crucial para orquestrar o processo de agendamento de salas. Ele recebe requisições das Views de Agendamento e Confirmação_Agendamento para:
+
+- Selecionar: Verificar a disponibilidade de salas para datas e horários específicos no Model de Agendamentos.
+- Criar: Registrar um novo agendamento no Model de Agendamentos, uma vez que a disponibilidade tenha sido confirmada e o usuário tenha finalizado a operação.
+- Atualizar: Modificar os detalhes de agendamentos existentes no Model de Agendamentos.
+- Deletar: Cancelar ou remover agendamentos no Model de Agendamentos. Ele atua como o intermediário principal para todas as ações relacionadas a agendamentos, garantindo que a lógica de negócios seja aplicada antes de interagir com o Model de Agendamentos para persistir ou recuperar os dados.
+
+ #### **•Model (Modelo)**
+A terceira área corresponde ao Modelo, que representa a camada de dados da aplicação. O Modelo se comunica diretamente com o banco de dados, sendo capaz de acessar, modificar ou recuperar informações das tabelas. Quando uma solicitação chega a ele através do Controlador, o Modelo executa a operação de dados requerida e envia os resultados de volta ao Controlador.
+
+**Usuários (Model):** O Model de Usuários corresponde à tabela de Usuários no banco de dados. Ele é responsável por gerenciar os dados dos usuários e suas credenciais. Seus principais atributos são:
+
+- Id: Um identificador único para cada usuário.
+- Nome: O nome completo do usuário.
+- E-mail: O endereço de e-mail do usuário, frequentemente usado como identificador de login.
+- Data_Cadastro: A data em que o usuário foi registrado no sistema.
+- Senha: A senha do usuário, armazenada de forma segura. Este Model é acessado pelo Controller de Usuários para realizar operações como verificar credenciais, criar novos usuários, atualizar informações ou deletar registros.
+
+**Salas (Model):** O Model de Salas representa a tabela de Salas no banco de dados. Ele armazena as informações detalhadas sobre cada sala disponível para agendamento. Seus principais atributos são:
+
+- Id: Um identificador único para cada sala.
+- Nome: O nome ou identificação da sala.
+- Capacidade: O número máximo de pessoas que a sala pode acomodar.
+- Disponibilidade: Um indicador que mostra se a sala está livre ou ocupada em determinados períodos. Este Model é consultado pelo Controller de Salas (e indiretamente pelo Controller de Agendamentos) para obter informações sobre as salas, verificar sua capacidade e disponibilidade antes de um agendamento.
+
+**Agendamentos (Model):** O Model de Agendamentos corresponde à tabela de Agendamentos no banco de dados. Ele é fundamental para registrar e gerenciar todos os agendamentos de salas. Seus principais atributos são:
+
+- Id: Um identificador único para cada agendamento.
+- Usuarios_Id: Uma chave estrangeira que vincula o agendamento a um usuário específico (da tabela de Usuários), indicando quem fez o agendamento.
+- Data_Hora_Inicio: A data e hora exatas de início do agendamento.
+- Data_Hora_Fim: A data e hora exatas de término do agendamento.
+- Dia_Agendado: A data em que o agendamento foi efetivamente registrado no sistema. Este Model é acessado pelo Controller de Agendamentos para criar novos agendamentos, consultar agendamentos existentes (para verificar disponibilidade ou listar agendamentos de um usuário), atualizar horários ou cancelar agendamentos. Ele desempenha um papel crucial na lógica de verificação de conflitos de horário.
   
-*Adicione as setas e explicações sobre como os dados fluem entre o Model, Controller e View.*
 
 ### 3.3. Wireframes (Semana 03)
 
@@ -261,7 +319,7 @@ Aplicativo mobile para reserva de salas de estudo do prédio **Arara Azul**, exc
 
 ### 3.6. WebAPI e endpoints (Semana 05)
 
-*Utilize um link para outra página de documentação contendo a descrição completa de cada endpoint. Ou descreva aqui cada endpoint criado para seu sistema.*  
+[Clique aqui para acessar o detalhamento de cada endopoint aplicada para o funcionamento do projeto](detalhamento_endpoints.md)
 
 ### 3.7 Interface e Navegação (Semana 07)
 

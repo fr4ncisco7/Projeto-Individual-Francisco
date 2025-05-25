@@ -28,7 +28,7 @@ async function obterUsuario(req, res) {
   }
 }
 
-// Função que já está funcionando
+
 async function criarUsuario(req, res) {
   try {
     const { nome, email, senha } = req.body;
@@ -43,14 +43,14 @@ async function criarUsuario(req, res) {
   }
 }
 
-// *** ADICIONE ESTAS FUNÇÕES ABAIXO ***
+
 
 async function atualizarUsuario(req, res) {
   try {
     const { id } = req.params;
     const { nome, email, senha } = req.body;
     
-    // Validação básica
+   
     if (!nome || !email || !senha) {
       return res.status(400).json({ error: 'Nome, email e senha são obrigatórios para atualização.' });
     }
@@ -72,7 +72,7 @@ async function excluirUsuario(req, res) {
     const { id } = req.params;
     const sucesso = await usuarioModel.deleteUsuario(id);
     if (sucesso) {
-      res.status(204).send(); // 204 No Content para exclusão bem-sucedida
+      res.status(204).send(); 
     } else {
       res.status(404).json({ error: 'Usuário não encontrado para exclusão.' });
     }
@@ -86,6 +86,6 @@ module.exports = {
   listarUsuarios,
   obterUsuario,
   criarUsuario,
-  atualizarUsuario, // Não esqueça de exportar!
-  excluirUsuario,   // Não esqueça de exportar!
+  atualizarUsuario, 
+  excluirUsuario,   
 };
