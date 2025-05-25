@@ -199,111 +199,162 @@ A terceira área corresponde ao Modelo, que representa a camada de dados da apli
 ### 3.4. Guia de estilos (Semana 05)
 
 
-##  Guia de Estilo –  Arara Azul (Mobile)
+## Guia de Estilo – Arara Azul (Mobile)
 
-##  Contexto
+## Contexto
 Aplicativo mobile para reserva de salas de estudo do prédio **Arara Azul**, exclusivo para estudantes.
 
 ---
 
-##  Paleta de Cores
+## Paleta de Cores
 
-| Função        | Descrição           | HEX      |
-| --------------| -------------------- | -------- |
-| Primária      | Azul Escuro          | `#21006F`|
-| Primária      | Azul Secundário      | `#6135C7`|
-| Secundária    | Branco               | `#FFFAFA`|
-| Secundária    | Preto                | `#000000`|
-| Terciária     | Cinza Claro          | `#D9D9D9`|
-| Terciária     | Cinza Médio          | `#817E7E`|
-| Destaque      | Amarelo (Seleção)    | `#FFF600`|
+| Função | Descrição | HEX | Representação |
+|---|---|---|---|
+| Primária | Azul Escuro | `#21006F` | <span style="display:inline-block;width:20px;height:20px;background-color:#21006F;border:1px solid #000;"></span> |
+| Primária | Azul Secundário | `#6135C7` | <span style="display:inline-block;width:20px;height:20px;background-color:#6135C7;border:1px solid #000;"></span> |
+| Secundária | Branco | `#FFFAFA` | <span style="display:inline-block;width:20px;height:20px;background-color:#FFFAFA;border:1px solid #000;"></span> |
+| Secundária | Preto | `#000000` | <span style="display:inline-block;width:20px;height:20px;background-color:#000000;border:1px solid #000;"></span> |
+| Terciária | Cinza Claro | `#D9D9D9` | <span style="display:inline-block;width:20px;height:20px;background-color:#D9D9D9;border:1px solid #000;"></span> |
+| Terciária | Cinza Médio | `#817E7E` | <span style="display:inline-block;width:20px;height:20px;background-color:#817E7E;border:1px solid #000;"></span> |
+| Destaque | Amarelo (Seleção) | `#FFF600` | <span style="display:inline-block;width:20px;height:20px;background-color:#FFF600;border:1px solid #000;"></span> |
 
 
 ---
 
-##  Tipografia
+## Tipografia
 
 - **Fonte:** Inter
 - **Estilo:** Regular
 - **Capitalização:** Primeira letra em maiúsculo nas frases.
 
-###  Tamanhos
+### Tamanhos
 
-| Aplicação               | Tamanho |
-| ------------------------| --------|
-| Títulos                 | 20      |
-| Botões e Informações    | 16      |
-| Avisos e Observações    | 12      |
+| Aplicação | Tamanho | Representação |
+|---|---|---|
+| Títulos | 20 | <span style="font-family: 'Inter', sans-serif; font-size: 20px;">Exemplo</span> |
+| Botões e Informações | 16 | <span style="font-family: 'Inter', sans-serif; font-size: 16px;">Exemplo</span> |
+| Avisos e Observações | 12 | <span style="font-family: 'Inter', sans-serif; font-size: 12px;">Exemplo</span> |
 
 ---
 
-##  Componentes e Elementos Visuais
+## Componentes e Elementos Visuais
 
-###  Botões
+### Botões
 - Fundo: `#21006F`, `#6135C7` ou `#000000` (para botões de ação como "Reservar", "Continuar")
 - Texto: `#FFFAFA` (branco) ou `#000000` (preto)
 - Raio (arredondamento): 10px
 - Stroke (borda): Preto (`#000000`), 2px de espessura
 - Sombra:
-  - Offset X: 6
-  - Offset Y: 4
-  - Blur: 4
-  - Spread: 2
+    - Offset X: 6
+    - Offset Y: 4
+    - Blur: 4
+    - Spread: 2
 
-###  Caixas (Inputs, Avisos, Informações)
+**Representação:**
+<button style="background-color: #21006F; color: #FFFAFA; border: 2px solid #000000; border-radius: 10px; padding: 8px 16px; font-family: 'Inter', sans-serif; font-size: 16px; box-shadow: 6px 4px 4px 2px rgba(0,0,0,0.4);">Botão Exemplo</button><br>
+<button style="background-color: #6135C7; color: #FFFAFA; border: 2px solid #000000; border-radius: 10px; padding: 8px 16px; font-family: 'Inter', sans-serif; font-size: 16px; box-shadow: 6px 4px 4px 2px rgba(0,0,0,0.4);">Botão Exemplo</button><br>
+<button style="background-color: #000000; color: #FFFAFA; border: 2px solid #000000; border-radius: 10px; padding: 8px 16px; font-family: 'Inter', sans-serif; font-size: 16px; box-shadow: 6px 4px 4px 2px rgba(0,0,0,0.4);">Botão Exemplo</button>
+
+### Caixas (Inputs, Avisos, Informações)
 - Fundo: Branco (`#FFFAFA`) ou Cinza (`#D9D9D9`)
 - Borda: Stroke Preto (`#000000`), 2px
 - Raio: 10px
 - Sombra padrão (X:6, Y:4, Blur:4, Spread:2)
 
-###  Calendário
+**Representação:**
+<div style="background-color: #FFFAFA; border: 2px solid #000000; border-radius: 10px; padding: 15px; width: 200px; box-shadow: 6px 4px 4px 2px rgba(0,0,0,0.4);">
+    <p style="font-family: 'Inter', sans-serif; font-size: 14px; margin: 0;">Exemplo de Caixa Branca</p>
+</div><br>
+<div style="background-color: #D9D9D9; border: 2px solid #000000; border-radius: 10px; padding: 15px; width: 200px; box-shadow: 6px 4px 4px 2px rgba(0,0,0,0.4);">
+    <p style="font-family: 'Inter', sans-serif; font-size: 14px; margin: 0;">Exemplo de Caixa Cinza</p>
+</div>
+
+### Calendário
 - Fundo: Azul Escuro (`#21006F`) ou Azul Secundário (`#6135C7`)
 - Dia Selecionado: Fundo Amarelo (`#FFF600`)
 - Texto: Preto (`#000000`) ou Branco (`#FFFAFA`)
 
-###  Cartões de Sala
+**Representação:**
+<div style="width: 250px; border: 2px solid #000; border-radius: 10px; overflow: hidden; box-shadow: 6px 4px 4px 2px rgba(0,0,0,0.4);">
+    <div style="background-color: #21006F; color: #FFFAFA; padding: 10px; text-align: center; font-family: 'Inter', sans-serif;">Maio 2025</div>
+    <div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; background-color: #6135C7; padding: 5px; font-family: 'Inter', sans-serif; color: #FFFAFA;">
+        <span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; background-color: #6135C7; padding-bottom: 10px; font-family: 'Inter', sans-serif; color: #FFFAFA;">
+        <span></span><span></span><span></span><span>1</span><span>2</span><span>3</span><span>4</span>
+        <span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span style="background-color: #FFF600; color: #000; border-radius: 50%; padding: 5px; display: inline-block;">10</span><span>11</span>
+        <span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span>
+        <span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span>
+        <span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span><span></span>
+    </div>
+</div>
+
+### Cartões de Sala
 - Fundo: Cinza Claro (`#D9D9D9`)
 - Ícones relacionados a estudo
 - Texto centralizado: "Sala 1", "Sala 2", etc.
 
+**Representação:**
+<div style="background-color: #D9D9D9; border: 2px solid #000000; border-radius: 10px; padding: 20px; width: 150px; text-align: center; box-shadow: 6px 4px 4px 2px rgba(0,0,0,0.4);">
+    <span style="font-size: 40px; display: block; margin-bottom: 10px;">📚</span>
+    <p style="font-family: 'Inter', sans-serif; font-size: 18px; font-weight: bold; margin: 0;">Sala 1</p>
+</div>
+
 ---
 
-##  Ícones e Ilustrações
+## Ícones e Ilustrações
 - Estilo: Flat design (não realista)
 - Temática: Estudos e Arara Azul
 - Paleta de cores seguindo o padrão do app
 - Bordas suaves e harmônicas
 
+**Representação:**
+<span style="font-size: 50px;">
+    📘<span style="color:#21006F;">🐦</span>
+</span>
+
 ---
 
-##  Layout e Grid
+## Layout e Grid
 
 - **Tamanho do Frame:** 402x935 px (Mobile)
 - **Grid:**
-  - 6 colunas
-  - Cor do grid: Vermelha
-- **Espaçamento:** 
-  - Segue múltiplos de 8px (recomendado)
+    - 6 colunas
+    - Cor do grid: Vermelha
+- **Espaçamento:**
+    - Segue múltiplos de 8px (recomendado)
+
+**Representação (simplificada do conceito de grid):**
+<div style="width: 402px; height: 100px; border: 2px solid #000; background-color: #f0f0f0; display: flex; justify-content: space-around; align-items: center;">
+    <div style="width: 15%; height: 80px; background-color: rgba(255,0,0,0.2);"></div>
+    <div style="width: 15%; height: 80px; background-color: rgba(255,0,0,0.2);"></div>
+    <div style="width: 15%; height: 80px; background-color: rgba(255,0,0,0.2);"></div>
+    <div style="width: 15%; height: 80px; background-color: rgba(255,0,0,0.2);"></div>
+    <div style="width: 15%; height: 80px; background-color: rgba(255,0,0,0.2);"></div>
+    <div style="width: 15%; height: 80px; background-color: rgba(255,0,0,0.2);"></div>
+</div>
 
 ---
 
-##  Efeitos (Sombra padrão)
+## Efeitos (Sombra padrão)
 
 - Offset X: 6
 - Offset Y: 4
 - Blur: 4
 - Spread: 2
 
+**Representação:**
+<div style="width: 100px; height: 50px; background-color: #D9D9D9; border: 2px solid #000; border-radius: 10px; box-shadow: 6px 4px 4px 2px rgba(0,0,0,0.4);"></div>
+
 ---
 
-##  Observações Gerais
+## Observações Gerais
 
 - Todos os elementos possuem raio de 10px e borda preta de 2px.
 - Consistência nas sombras e bordas para garantir unidade visual.
 - A estética reflete a identidade do prédio Arara Azul e o foco em ambiente acadêmico.
 
 ---
-
 
 
 
