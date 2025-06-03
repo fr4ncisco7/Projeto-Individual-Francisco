@@ -95,7 +95,8 @@ O esquema de arquitetura MVC (Model-View-Controller) é uma representação visu
 </div>
 
 ### **•View (Visão)**
-Esta primeira área do diagrama representa a Visão, que é a parte da aplicação que o usuário realmente vê e com a qual interage. Ela é responsável por apresentar as informações ao usuário e por capturar suas ações, enviando-as para o Controller. Nesse sentido, nela está contido todas as telas da aplicação web que nesse caso são a tela de login, agendamento e a de confirmação de agendamento. Sendo assim, cada requisição está representada em sua respectiva tela, indicando o que acontecerá nela e qual será o fluxo.
+Esta primeira área do diagrama representa a Visão, que é a parte da aplicação que o usuário realmente vê e com a qual interage. Ela é responsável por apresentar as informações ao usuário e por capturar suas ações, enviando-as para o Controller. Nesse sentido, nela está contido todas as tela
+s da aplicação web que nesse caso são a tela de login, agendamento e a de confirmação de agendamento. Sendo assim, cada requisição está representada em sua respectiva tela, indicando o que acontecerá nela e qual será o fluxo.
 
 - **Login:** a tela de login tem dois atributos principais, o email e a senha. Quando o usuário colocar o email e a senha, a requisição é mandada para o controller, que por lar ele pede para o model conferir no banco de dados se aquele email e senha existe, ou então cria um email e senha.
 

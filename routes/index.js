@@ -2,10 +2,19 @@
 const express = require('express');
 const router = express.Router();
 
+// Rota para renderizar a página inicial
+router.get('/', (req, res) => {
+  res.render('index', {
+    title: 'Página Inicial',
+    message: 'Bem-vindo ao aplicativo com EJS e CSS!' // Adicione aqui a mensagem que você deseja exibir na página inicial
+  });
+});
+
 const TarefaController = require('../controllers/TarefaController');
 const UsuarioController = require('../controllers/usuarioController');
 const SalaController = require('../controllers/SalaController');
 const AgendamentoController = require('../controllers/AgendamentoController');
+
 
 
 // Rotas para tarefas
