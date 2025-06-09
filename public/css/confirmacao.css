@@ -1,0 +1,158 @@
+body {
+    background-color: #21006F;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.confirmacao-container {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.sala-info {
+    background-color: #6135C7;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    border: 2px solid black;
+    padding: 30px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.sala-imagem {
+    background-color: #D9D9D9;
+    width: 300px;
+    height: 200px;
+    margin: auto;
+    border: 2px solid black;
+    box-shadow: 10px 6px 4px rgba(0, 0, 0, 0.372);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.sala-imagem img {
+    max-width: 140px;
+    max-height: 140px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+#sala-nome {
+    font: normal 20px 'Inter';
+    color: black;
+    margin-top: 10px;
+}
+
+.detalhes-agendamento {
+    background-color: white;
+    width: 100%;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.eventos {
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.data-info {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.data-info div {
+    margin-bottom: 5px;
+}
+
+.regras-uso {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #D9D9D9;
+    padding: 5px;
+    width: fit-content;
+}
+
+.regras-uso input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+.regras-uso label {
+    font-size: 14px;
+    color: #333;
+}
+
+.aviso-container {
+    background-color: white;
+    width: 100%;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.aviso-titulo {
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.aviso-texto {
+    color: #333;
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: justify;
+}
+
+.botao-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#btn-reservar {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#btn-reservar:hover {
+    background-color: #333;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .sala-info, .detalhes-agendamento, .aviso-container {
+        width: 90%;
+    }
+    
+    .sala-imagem {
+        width: 90%;
+        height: 180px;
+    }
+}

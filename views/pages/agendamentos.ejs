@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamentos - Edifício Arara Azul</title>
+  <link rel="stylesheet" href="/css/agendamento.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1>Sistema de Agendamento</h1>
+      <h2>Edifício Arara Azul</h2>
+      <nav>
+        <ul>
+          <li><a href="/agendamentos" class="active">Agendamentos</a></li>
+          <li><a href="/perfil">Meu Perfil</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="content">
+      <div class="agendamento-container">
+        <!-- Salas disponíveis -->
+        <div class="salas-container">
+          <div class="sala-card">
+            <div class="sala-icon">
+              <img src="/images/sala1.png" alt="Sala 1">
+            </div>
+            <div class="sala-nome">Sala 1</div>
+          </div>
+          
+          <div class="sala-card">
+            <div class="sala-icon">
+              <img src="/images/sala2.png" alt="Sala 2">
+            </div>
+            <div class="sala-nome">Sala 2</div>
+          </div>
+          
+          <div class="sala-card">
+            <div class="sala-icon">
+              <img src="/images/sala3.png" alt="Sala 3">
+            </div>
+            <div class="sala-nome">Sala 3</div>
+          </div>
+        </div>
+        
+        <!-- Calendário -->
+        <div class="calendario-container">
+          <div class="calendario-header">
+            <button class="btn-nav prev">&lt;</button>
+            <div class="mes-ano">Abril de ano 2025</div>
+            <button class="btn-nav next">&gt;</button>
+          </div>
+          
+          <div class="calendario-dias-semana">
+            <div>Dom</div>
+            <div>Seg</div>
+            <div>Ter</div>
+            <div>Qua</div>
+            <div>Qui</div>
+            <div>Sex</div>
+            <div>Sab</div>
+          </div>
+          
+          <div class="calendario-dias">
+            <!-- Os dias serão gerados via JavaScript -->
+          </div>
+          
+          <div class="calendario-footer">
+            <div class="marcador-especial"></div>
+            <div class="marcador-especial"></div>
+          </div>
+        </div>
+        
+        <!-- Horários de reserva -->
+        <div class="horarios-container">
+          <div class="horarios-titulo">
+            <span class="horarios-icon">⚫</span>
+            Horários de reservas
+          </div>
+          
+          <div class="horarios-opcoes">
+            <button class="horario-btn">00:00</button>
+            <button class="horario-btn">04:00</button>
+            <button class="horario-btn selected">08:00</button>
+            <button class="horario-btn">12:00</button>
+            <button class="horario-btn">16:00</button>
+            <button class="horario-btn">20:00</button>
+          </div>
+        </div>
+        
+        <!-- Avisos -->
+        <div class="avisos-container">
+          <div class="avisos-titulo">Avisos</div>
+          <div class="avisos-conteudo">
+            <p>.Por questão de higiene é proibido comer nesse local</p>
+            <p>.Mantenha o ambiente limpo</p>
+            <p>.Em caso de descumprimento da norma sujeito a multa</p>
+          </div>
+        </div>
+        
+        <!-- Botão de continuar -->
+        <div class="continuar-container">
+          <button id="btn-continuar">Continuar</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Variáveis para controlar o mês e ano atual do calendário
+      let mesAtual = 4; // Abril
+      let anoAtual = 2025;
+      
+      // Gerar calendário inicial
+      gerarCalendario(mesAtual, anoAtual);
+      
+      // Event listeners para botões de navegação do calendário
+      document.querySelector('.btn-nav.prev').addEventListener('click', () => {
+        // Navegar para o mês anterior
+        mesAtual--;
+        if (mesAtual < 1) {
+          mesAtual = 12;
+          anoAtual--;
+        }
+        gerarCalendario(mesAtual, anoAtual);
+      });
+      
+      document.querySelector('.btn-nav.next').addEventListener('click', () => {
+        // Navegar para o próximo mês
+        mesAtual++;
+        if (mesAtual > 12) {
+          mesAtual = 1;
+          anoAtual++;
+        }
+        gerarCalendario(mesAtual, anoAtual);
+      });
+      
+      // Event listeners para seleção de sala
+      document.querySelectorAll('.sala-card').forEach(sala => {
+        sala.addEventListener('click', () => {
+          document.querySelectorAll('.sala-card').forEach(s => s.classList.remove('selected'));
+          sala.classList.add('selected');
+        });
+      });
+      
+      // Event listeners para seleção de horário
+      document.querySelectorAll('.horario-btn').forEach(horario => {
+        horario.addEventListener('click', () => {
+          document.querySelectorAll('.horario-btn').forEach(h => h.classList.remove('selected'));
+          horario.classList.add('selected');
+        });
+      });
+      
+      // Event listener para botão continuar
+      document.getElementById('btn-continuar').addEventListener('click', () => {
+        const salaSelected = document.querySelector('.sala-card.selected');
+        const diaSelected = document.querySelector('.calendario-dia.selected');
+        const horarioSelected = document.querySelector('.horario-btn.selected');
+        
+        if (!salaSelected || !diaSelected || !horarioSelected) {
+          alert('Por favor, selecione uma sala, um dia e um horário.');
+          return;
+        }
+        
+        const sala = salaSelected.querySelector('.sala-nome').textContent;
+        const dia = diaSelected.textContent;
+        const horario = horarioSelected.textContent;
+        
+        // Obter o mês e ano atual do calendário
+        const mesNumero = mesAtual.toString().padStart(2, '0');
+        
+        // Redirecionar para a página de confirmação com os parâmetros
+        window.location.href = `/confirmacaoAgendamento?sala=${encodeURIComponent(sala)}&dia=${dia}&mes=${mesNumero}&ano=${anoAtual}&horario=${encodeURIComponent(horario)}`;
+      });
+    });
+    
+    // Função para gerar o calendário
+    function gerarCalendario(mes, ano) {
+      const diasContainer = document.querySelector('.calendario-dias');
+      const mesAnoElement = document.querySelector('.mes-ano');
+      
+      // Limpar o container de dias
+      diasContainer.innerHTML = '';
+      
+      // Atualizar o título do mês e ano
+      const nomeMes = getNomeMes(mes);
+      mesAnoElement.textContent = `${nomeMes} de ${ano}`;
+      
+      // Calcular o primeiro e último dia do mês
+      const primeiroDia = new Date(ano, mes - 1, 1);
+      const ultimoDia = new Date(ano, mes, 0);
+      const totalDias = ultimoDia.getDate();
+      const primeiroDiaSemana = primeiroDia.getDay();
+      
+      // Adicionar espaços vazios para os dias antes do primeiro dia do mês
+      for (let i = 0; i < primeiroDiaSemana; i++) {
+        const diaVazio = document.createElement('div');
+        diaVazio.className = 'calendario-dia vazio';
+        diasContainer.appendChild(diaVazio);
+      }
+      
+      // Adicionar os dias do mês
+      for (let i = 1; i <= totalDias; i++) {
+        const diaElement = document.createElement('div');
+        diaElement.className = 'calendario-dia';
+        diaElement.textContent = i;
+        
+        // Verificar disponibilidade
+        const disponivel = verificarDisponibilidade(i, mes, ano);
+        if (!disponivel) {
+          diaElement.classList.add('indisponivel');
+          diaElement.title = 'Indisponível para agendamento';
+        } else {
+          // Adicionar evento de clique apenas para dias disponíveis
+          diaElement.addEventListener('click', () => {
+            document.querySelectorAll('.calendario-dia').forEach(d => d.classList.remove('selected'));
+            diaElement.classList.add('selected');
+          });
+        }
+        
+        // Verificar se é o dia atual (para destacar)
+        const hoje = new Date();
+        if (hoje.getDate() === i && hoje.getMonth() === mes - 1 && hoje.getFullYear() === ano) {
+          diaElement.classList.add('hoje');
+        }
+        
+        diasContainer.appendChild(diaElement);
+      }
+      
+      // Se for o mês de abril de 2025, selecionar o dia 28 por padrão (conforme a imagem)
+      if (mes === 4 && ano === 2025) {
+        const dia28 = diasContainer.children[primeiroDiaSemana + 28 - 1];
+        if (dia28) {
+          dia28.classList.add('selected');
+        }
+      }
+    }
+    
+    // Função para obter o nome do mês a partir do número
+    function getNomeMes(numeroMes) {
+      const meses = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril',
+        'Maio', 'Junho', 'Julho', 'Agosto',
+        'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+      ];
+      return meses[numeroMes - 1];
+    }
+
+    // Função para verificar se um dia está disponível para agendamento
+    function verificarDisponibilidade(dia, mes, ano) {
+      // Aqui você implementaria a lógica para verificar no backend
+      // se o dia está disponível para agendamento
+      
+      // Por enquanto, vamos simular alguns dias indisponíveis
+      const diasIndisponiveis = [
+        { dia: 15, mes: 4, ano: 2025 },
+        { dia: 16, mes: 4, ano: 2025 },
+        { dia: 25, mes: 4, ano: 2025 }
+      ];
+      
+      // Verificar se o dia está na lista de indisponíveis
+      return !diasIndisponiveis.some(data => 
+        data.dia === dia && data.mes === mes && data.ano === ano
+      );
+    }
+  </script>
+</body>
+</html>

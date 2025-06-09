@@ -1,5 +1,6 @@
 // controllers/usuarioController.js
-const usuarioModel = require('../models/usuarioModel'); // Verifique se o caminho está correto
+const usuarioModel = require('../models/usuarioModel');
+const pool = require('../config/db');
 
 // Função que já está funcionando
 async function listarUsuarios(req, res) {
@@ -82,10 +83,52 @@ async function excluirUsuario(req, res) {
   }
 }
 
+
+async function loginUsuario(req, res) {
+  try {
+    const { email, senha } = req.body;
+    
+    if (!email || !senha) {
+      return res.status(400).json({ error: 'Email e senha são obrigatórios.' });
+    }
+    
+    // Buscar usuário pelo email
+    const query = 'SELECT * FROM usuarios WHERE email = $1';
+    const result = await pool.query(query, [email]);
+    
+    if (result.rows.length === 0) {
+      return res.status(401).json({ error: 'Usuário não encontrado.' });
+    }
+    
+    const usuario = result.rows[0];
+    
+    // Em um sistema real, você deve comparar senhas com hash
+    // Aqui estamos fazendo uma comparação simples para demonstração
+    if (senha !== usuario.senha) {
+      return res.status(401).json({ error: 'Senha incorreta.' });
+    }
+    
+    // Aqui você poderia implementar JWT ou sessões
+    // Para simplificar, apenas retornamos sucesso
+    res.status(200).json({ 
+      message: 'Login realizado com sucesso',
+      usuario: {
+        id: usuario.id,
+        nome: usuario.nome,
+        email: usuario.email
+      }
+    });
+  } catch (error) {
+    console.error('Erro ao fazer login:', error);
+    res.status(500).json({ error: 'Erro interno do servidor ao fazer login.' });
+  }
+}
+
 module.exports = {
   listarUsuarios,
   obterUsuario,
   criarUsuario,
   atualizarUsuario, 
-  excluirUsuario,   
+  excluirUsuario,
+  loginUsuario
 };

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmação de Agendamento - Edifício Arara Azul</title>
+  <link rel="stylesheet" href="/css/confirmacao.css">
+</head>
+<body>
+  <div class="confirmacao-container">
+    <div class="sala-info">
+      <div class="sala-imagem">
+        <img id="sala-img" src="/images/sala1.png" alt="Sala">
+        <div id="sala-nome">Sala 1</div>
+      </div>
+    </div>
+    
+    <div class="detalhes-agendamento">
+      <div class="eventos" id="eventos">[Sem eventos para essa data]</div>
+      <div class="data-info">
+        <div>Data: <span id="data-selecionada">04/04/2025</span></div>
+        <div>Horário: <span id="horario-selecionado">08:00 Am</span></div>
+      </div>
+      <div class="regras-uso">
+        <input type="checkbox" id="aceite-regras" required>
+        <label for="aceite-regras">Regras de uso</label>
+      </div>
+    </div>
+    
+    <div class="aviso-container">
+      <div class="aviso-titulo">Aviso</div>
+      <div class="aviso-texto">
+        Ao reservar a sala de estudos você está assumindo a responsabilidade das regras de uso desse local.
+      </div>
+    </div>
+    
+    <div class="botao-container">
+      <button id="btn-reservar">Reservar</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Obter parâmetros da URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const sala = urlParams.get('sala');
+      const dia = urlParams.get('dia');
+      const mes = urlParams.get('mes');
+      const ano = urlParams.get('ano');
+      const horario = urlParams.get('horario');
+      
+      // Preencher os dados na tela
+      if (sala) {
+        document.getElementById('sala-nome').textContent = sala;
+        document.getElementById('sala-img').src = `/images/${sala.toLowerCase().replace(' ', '')}.png`;
+      }
+      
+      if (dia && mes && ano) {
+        document.getElementById('data-selecionada').textContent = `${dia.padStart(2, '0')}/${mes.padStart(2, '0')}/${ano}`;
+      }
+      
+      if (horario) {
+        document.getElementById('horario-selecionado').textContent = horario;
+      }
+      
+      // Event listener para o botão de reservar
+      document.getElementById('btn-reservar').addEventListener('click', () => {
+        const aceitouRegras = document.getElementById('aceite-regras').checked;
+        
+        if (!aceitouRegras) {
+          alert('Você precisa aceitar as regras de uso para continuar.');
+          return;
+        }
+        
+        // Preparar dados para enviar ao servidor
+        const dadosAgendamento = {
+          sala_id: sala.replace('Sala ', ''), // Extrair apenas o número da sala
+          data_inicio: `${ano}-${mes}-${dia}T${horario}:00`, // Formato ISO
+          titulo: `Reserva ${sala}`,
+          descricao: 'Agendamento de sala de estudos'
+        };
+        
+        // Enviar para o servidor
+        fetch('/api/agendamentos', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(dadosAgendamento)
+        })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error('Erro ao fazer agendamento');
+        })
+        .then(data => {
+          alert('Agendamento realizado com sucesso!');
+          window.location.href = '/agendamentos'; // Redirecionar para a lista de agendamentos
+        })
+        .catch(error => {
+          alert('Erro ao fazer agendamento: ' + error.message);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

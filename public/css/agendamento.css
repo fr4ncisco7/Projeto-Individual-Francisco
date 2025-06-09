@@ -1,0 +1,365 @@
+/* Reset e estilos gerais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #21006F; /* Roxo escuro */
+  color: white;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  background-color: #21006F; /* Roxo escuro */
+  color: white;
+  padding: 15px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+  color: white;
+  margin-bottom: 5px;
+}
+
+.app-header h2 {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+nav a:hover, nav a.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  max-width: 400px; /* Largura fixa para corresponder à imagem */
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Estilos específicos para a tela de agendamento */
+.agendamento-container {
+  background-color: #21006F; /* Roxo escuro */
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Salas */
+.salas-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sala-card {
+  background-color: #e0e0e0; /* Cinza claro */
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  flex: 1;
+  transition: transform 0.2s;
+  border: 2px solid black; /* Borda preta */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+}
+
+.sala-card:hover {
+  transform: translateY(-5px);
+}
+
+.sala-card.selected {
+  background-color: #c0c0c0;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.sala-icon {
+ 
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; 
+}
+
+.sala-icon img {
+  width: 80%;
+  height: auto;
+}
+
+.sala-nome {
+  font-weight: bold;
+  font-size: 14px;
+  color: black; /* Texto preto */
+}
+
+/* Calendário */
+.calendario-container {
+  background-color: #6135C7; /* Roxo mais claro */
+  border-radius: 10px;
+  padding: 15px;
+  color: white;
+  border: 2px solid black; /* Borda preta */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+}
+
+.calendario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 0 5px;
+}
+
+.btn-nav {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.btn-nav:hover {
+  transform: scale(1.2);
+}
+
+.mes-ano {
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.calendario-dias-semana {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.calendario-dias {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  text-align: center;
+}
+
+.calendario-dia {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 auto;
+}
+
+.calendario-dia.hoje {
+  border: 2px solid #fff;
+  font-weight: bold;
+}
+
+.calendario-dia.selected {
+  background-color: #fff600; /* Amarelo */
+  color: black;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.calendario-dia:hover:not(.vazio):not(.selected) {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+}
+
+.calendario-dia.vazio {
+  visibility: hidden;
+}
+
+.calendario-dia.indisponivel {
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+.calendario-dia.indisponivel:hover {
+  background-color: transparent;
+}
+
+.calendario-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.marcador-especial {
+  width: 20px;
+  height: 20px;
+  background-color: #fff600; /* Amarelo */
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  transition: transform 0.2s;
+}
+
+.marcador-especial:hover {
+  transform: scale(1.2);
+}
+
+/* Horários */
+.horarios-container {
+  margin-top: 10px;
+}
+
+.horarios-titulo {
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 8px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 2px solid black; /* Borda preta */
+}
+
+.horarios-icon {
+  font-size: 16px;
+}
+
+.horarios-opcoes {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.horario-btn {
+  background-color: #6135C7; /* Roxo mais claro */
+  color: white;
+  border: 2px solid #6135C7;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.horario-btn.selected {
+  background-color: #fff600; /* Amarelo */
+  color: black;
+  font-weight: bold;
+  border: 2px solid black; /* Borda preta */
+}
+
+/* Avisos */
+.avisos-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 10px;
+  border: 2px solid black; /* Borda preta */
+}
+
+.avisos-titulo {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: black;
+}
+
+.avisos-conteudo {
+  font-size: 12px;
+  line-height: 1.4;
+  color: black;
+  text-align: right; /* Alinhamento à direita como na imagem */
+}
+
+.avisos-conteudo p {
+  margin-bottom: 5px;
+}
+
+/* Botão continuar */
+.continuar-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+#btn-continuar {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#btn-continuar:hover {
+  background-color: #333;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .agendamento-container {
+    padding: 15px;
+  }
+  
+  .sala-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .calendario-dia {
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+  }
+  
+  .horario-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}

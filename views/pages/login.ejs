@@ -1,54 +1,72 @@
-<h2>Página 1</h2>
-<p>Lista de Usuários:</p>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Sistema de Reservas</title>
+  <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <h1>Acesso ao Sistema</h1>
+      <h2>Edifício Arara Azul</h2>
+      
+      <div id="login-message" class="message"></div>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email"></label>
+          <input type="email" id="email" name="email" required placeholder="Email">
+        </div>
+        
+        <div class="form-group">
+          <label for="senha"></label>
+          <input type="password" id="senha" name="senha" required placeholder="Senha">
+        </div>
+        
+        <button type="submit" class="btn-primary">Login</button>
+      </form>
+      
+      
+    </div>
+  </div>
 
-<table border="1" id="usersTable">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>Email</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td colspan="3">Carregando usuários...</td>
-    </tr>
-  </tbody>
-</table>
-
-<script>
-  // Função para buscar usuários da API e renderizar na tabela
-  async function fetchUsers() {
-    try {
-      const response = await fetch('/users');
-      if (!response.ok) {
-        throw new Error('Erro ao buscar usuários');
-      }
-      const users = await response.json();
-
-      const tableBody = document.querySelector('#usersTable tbody');
-      tableBody.innerHTML = ''; // Limpa o conteúdo anterior
-
-      if (users.length > 0) {
-        users.forEach(user => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${user.id}</td>
-            <td>${user.name}</td>
-            <td>${user.email}</td>
-          `;
-          tableBody.appendChild(row);
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+      const messageDiv = document.getElementById('login-message');
+      
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, senha })
         });
-      } else {
-        tableBody.innerHTML = '<tr><td colspan="3">Nenhum usuário encontrado.</td></tr>';
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          messageDiv.textContent = 'Login realizado com sucesso!';
+          messageDiv.className = 'message success';
+          // Redirecionar após login bem-sucedido
+          window.location.href = '/agendamentos';
+        } else {
+          messageDiv.textContent = data.error || 'Falha no login. Verifique suas credenciais.';
+          messageDiv.className = 'message error';
+        }
+      } catch (error) {
+        messageDiv.textContent = 'Erro ao conectar ao servidor.';
+        messageDiv.className = 'message error';
+        console.error('Erro:', error);
       }
-    } catch (error) {
-      console.error(error);
-      const tableBody = document.querySelector('#usersTable tbody');
-      tableBody.innerHTML = '<tr><td colspan="3">Erro ao carregar usuários.</td></tr>';
-    }
-  }
+    });
+  </script>
+</body>
+</html>
 
-  // Chama a função ao carregar a página
-  fetchUsers();
-</script>
