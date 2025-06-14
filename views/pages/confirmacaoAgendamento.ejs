@@ -72,37 +72,65 @@
           return;
         }
         
-        // Preparar dados para enviar ao servidor
-        const dadosAgendamento = {
-          sala_id: sala.replace('Sala ', ''), // Extrair apenas o número da sala
-          data_inicio: `${ano}-${mes}-${dia}T${horario}:00`, // Formato ISO
-          titulo: `Reserva ${sala}`,
-          descricao: 'Agendamento de sala de estudos'
-        };
+        // Obter dados do agendamento
+        const sala = document.getElementById('sala-nome').textContent;
+        const sala_id = sala.replace('Sala ', ''); // Extrair apenas o número da sala
+        const dataTexto = document.getElementById('data-selecionada').textContent;
+        const horarioTexto = document.getElementById('horario-selecionado').textContent;
         
-        // Enviar para o servidor
-        fetch('/api/agendamentos', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(dadosAgendamento)
-        })
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error('Erro ao fazer agendamento');
-        })
-        .then(data => {
-          alert('Agendamento realizado com sucesso!');
-          window.location.href = '/agendamentos'; // Redirecionar para a lista de agendamentos
-        })
-        .catch(error => {
-          alert('Erro ao fazer agendamento: ' + error.message);
-        });
+        // Converter para formato ISO
+        const [dia, mes, ano] = dataTexto.split('/');
+        const hora = horarioTexto.split(':')[0];
+        const data_inicio = `${ano}-${mes}-${dia}T${hora}:00:00`;
+        
+        // Verificar disponibilidade antes de enviar
+        fetch(`/api/agendamentos/verificar-disponibilidade?sala_id=${sala_id}&data=${ano}-${mes}-${dia}&hora=${hora}`)
+          .then(response => response.json())
+          .then(data => {
+            if (!data.disponivel) {
+              alert('Este horário não está mais disponível. Por favor, escolha outro horário.');
+              window.location.href = '/agendamentos'; // Voltar para a tela de agendamento
+              return;
+            }
+            
+            // Preparar dados para enviar ao servidor
+            const dadosAgendamento = {
+              sala_id: sala_id,
+              data_inicio: data_inicio,
+              titulo: `Reserva ${sala}`,
+              descricao: 'Agendamento de sala de estudos'
+            };
+            
+            // Enviar para o servidor
+            fetch('/api/agendamentos', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(dadosAgendamento)
+            })
+            .then(response => {
+              if (response.ok) {
+                return response.json();
+              }
+              return response.json().then(err => {
+                throw new Error(err.error || 'Erro ao fazer agendamento');
+              });
+            })
+            .then(data => {
+              alert('Agendamento realizado com sucesso!');
+              window.location.href = '/agendamentos'; // Redirecionar para a lista de agendamentos
+            })
+            .catch(error => {
+              alert('Erro ao fazer agendamento: ' + error.message);
+            });
+          })
+          .catch(error => {
+            alert('Erro ao verificar disponibilidade: ' + error.message);
+          });
       });
     });
   </script>
 </body>
 </html>
+

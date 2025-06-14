@@ -16,7 +16,7 @@
 
 <br>
 
-## <a name="c1"></a>1. Introdução (Semana 01)
+## <a name="c1"></a>1. Introdução 
 
 Em um prédio estudantil chamado "Arara Azul", há diversas salinhas de estudo que são disponibilizadas para os moradores. Entretanto, devido à desorganização do prédio e à falta de regras claras, há diversos conflitos entre as pessoas, como moradores que deixam suas coisas nas salinhas e não voltam, além de pessoas que passam muito tempo sem deixar outras usarem. Com isso, o prédio Arara Azul decidiu entrar em contato com Francisco, aluno do Inteli, para que ele conseguisse resolver aquele problema. Assim, Francisco observou a necessidade de criar uma plataforma com um sistema de agendamento para as salas de estudo, com horários bem definidos, certas limitações de agendamento sucessivos e com as regras do espaço para que todos os moradores conseguissem usar sem nenhum conflito .
 
@@ -24,47 +24,66 @@ Em um prédio estudantil chamado "Arara Azul", há diversas salinhas de estudo q
 
 ## <a name="c2"></a>2. Visão Geral da Aplicação Web
 
-### 2.1. Personas (Semana 01)
-## Sobre
-Meu nome é Eloisa Borges Lima, sou estudante de medicina na Idomede, tenho 18 anos e sou natural de Caririaçu, Ceará. Sou uma pessoa dedicada, esforçada e muito organizada; gosto de planejar toda a minha rotina, mas estou preparada para imprevistos. Atualmente, estou morando na cidade de Juazeiro do Norte porque estou em busca de realizar o meu sonho de me tornar médica. Por questões de distância, tive que procurar um prédio perto da faculdade, e foi assim que conheci o prédio Arara Azul, um prédio universitário muito acolhedor e com uma estrutura de ponta toda preparada para estudantes. Entretanto, mal organizado, e com isso estou pensando em mudar de prédio.
+### 2.1. Personas 
+Personas são arquétipos de usuários, criados para personificar os diferentes perfis que farão uso do produto. Elas desempenham um papel crucial ao nos permitir compreender profundamente as demandas dos usuários e, consequentemente, moldar a solução para melhor atender ao público-alvo. Com base nessa premissa, abaixo será mostrada a persona de uma estudante de medicina moradora do prédio. (Na imagem são mostradas as características da persona. Consulte a documentação para mais detalhes.)
 
 <div align="center">
   <sub>Persona Eloisa Borges Lima</sub><br>
-  <img src="assets/persona.jpg" width="50%">
+  <img src="../assets/persorna.png" width="100%">
 </div>
 
-Necessidades: Eloísa precisa conseguir estudar quando chega da faculdade.
+### **Necessidades**
+Eloísa necessita da capacidade de planejar e reservar com antecedência um espaço de estudo nas salinhas do prédio "Arara Azul" de forma previsível, eliminando a incerteza e a pressa diária. É fundamental para ela assegurar que, ao chegar à sala de estudo agendada, o espaço estará disponível, organizado e propício para suas atividades acadêmicas, seja para estudo individual ou em grupo. Dessa forma, ela poderá otimizar seu tempo pós-faculdade, focando nos estudos sem o estresse de procurar por uma sala livre.
 
-Dores: Ao chegar da faculdade às 16h, ela corre para tentar pegar uma salinha de estudo e, ao chegar lá, encontra o seguinte cenário: algumas pessoas estão na mesma sala desde o meio-dia, outras estão usando o espaço para jogar jogos eletrônicos, e as demais salinhas estão cheias de mochilas e cadernos, mas sem nenhuma pessoa dentro. Nesse cenário, ela não consegue realizar seus estudos, nem individualmente nem em grupo, o que prejudica os encontros marcados com suas amigas e está afetando diretamente suas notas.
+### **Dores**
+Ao chegar da faculdade, geralmente por volta das 16h, Eloísa frequentemente se depara com a indisponibilidade e o uso inadequado das salinhas de estudo. A ausência de um sistema de agendamento claro resulta em situações caóticas: moradores ocupam as salas por períodos excessivos, por vezes desde o meio-dia, impedindo o rodízio. Além disso, sem uma gestão adequada, esses espaços são desvirtuados do seu propósito, utilizados para lazer como jogos eletrônicos, o que prejudica o ambiente acadêmico. Há também a frustração com a "ocupação fantasma", onde as salinhas estão cheias de pertences como mochilas e cadernos, mas sem pessoas presentes, resultando em espaços bloqueados e inutilizados. Consequentemente, a falta de um mecanismo de reserva eficaz impede Eloísa de encontrar um espaço adequado e com privacidade para realizar seus estudos e de se encontrar com suas amigas para sessões de estudo em grupo ou para tirar dúvidas, afetando diretamente suas notas. A necessidade constante de "correr" para tentar pegar uma sala e a frustração de não encontrar ambientes disponíveis devido à ausência de organização prévia geram um impacto negativo em seu bem-estar e na sua satisfação com o prédio Arara Azul.
 
-Solução: Com a solução e implementação do sistema de agendamento das salinhas de estudo, proposta por Francisco, os alunos só poderão acessar esses espaços mediante agendamento, com bloqueio de agendamentos sucessivos por uma mesma pessoa. Dessa forma, Eloísa conseguirá reservar seu horário na sala de estudos com antecedência. Assim, ela não terá pressa para voltar da faculdade, terá privacidade para estudar, um espaço para estudo coletivo e para tirar dúvidas com as amigas, além de aumentar sua satisfação com o prédio Arara Azul.
+### **Solução Proposta**
+(Sistema de Agendamento de Salinhas)
+Com a implementação do sistema de agendamento das salinhas de estudo, proposta por Francisco, os alunos terão acesso a esses espaços de forma organizada e com regras claras.
 
-### 2.2. User Stories (Semana 01)
+- **Acesso Controlado por Agendamento:** Garante que apenas usuários com agendamento possam utilizar as salas, eliminando a ocupação indevida.
 
-US01- Como moradora, eu quero poder ver eventos que irão interditar as salas para que eu consiga organizar minha rotina.
+- **Bloqueio de Agendamentos Sucessivos:** Implementa limites para o tempo de uso contínuo, promovendo o rodízio e a justiça na utilização do espaço.
 
-US02- Como moradora, eu quero que na plataforma indique boas práticas de cuidado com a sala agendada para que não prejudique a experiência do próximo.
+- **Comunicação de Regras:** A plataforma poderá exibir as regras de uso das salas, incentivando um ambiente mais respeitoso e produtivo para todos.
 
-US03- Como uma estudante de medicina e moradora do prédio, quero poder ver os horários disponível de agendamento das salinhas particulares para que eu consiga organizar meus estudos.
+### 2.2. User Stories 
+
+**US01-** Como moradora, eu quero poder ver eventos que irão interditar as salinhas de estudo, para que eu consiga organizar minha rotina de estudos sem imprevistos.
+
+**US02-** Como moradora, eu quero que a plataforma indique boas práticas de cuidado com a sala agendada, para que não prejudique a experiência do próximo usuário e mantenha o ambiente organizado.
+
+**US03-** Como moradora, eu quero poder ver os horários disponíveis das salinhas particulares e agendá-las, para que eu consiga organizar e garantir meu espaço de estudo.
 
 ## Método INVEST
-Em termos gerais o método INVEST é muito utilizado na metodologia agil para analisar a qualidade de uma user story com critérios de avaliação para garantir que as histórias estejam bem escritas e eficar para o planejamento e desenvolvimento. INVEST(Independent, Negotiable, Valuable, Estimable, Small, Testable).
+O Método INVEST é utilizado para analisar a qualidade de uma User Story com critérios de avaliação para garantir que as histórias estejam bem escritas e eficazes para o planejamento e desenvolvimento. Cada letra do acrônimo representa uma característica importante que uma boa User Story deve ter:
 
-Ele fornece um conjunto de critérios para garantir que as histórias de usuário sejam bem escritas e eficazes para o planejamento e desenvolvimento. Cada letra do acrônimo representa uma característica importante que uma boa User Story deve ter:
+- ***I - Independent (Independente):***
+A User Story US03 por si só possui uma história independente. Com ela, temos a informação de que o morador busca visualizar e agendar horários de salinhas de estudo para organizar seu aprendizado. Embora existam dependências da infraestrutura básica (como o sistema de login ou a existência das salas), a funcionalidade de visualizar e agendar é independente de outras funcionalidades maiores, como o cancelamento de agendamento, por exemplo.
 
-I -  A user story por si só já possui uma história independente, com ela tenho informações que a pessoa é uma estudante e moradora de um prédio e que busca horários de agendamento disponíveis das salas de estudos para melhorar e organizar o seu aprendizado. Pode haver dependências da infraestrutura básica (existência das salas, sistema de login), mas a história em si parece independente dessas camadas subjacentes.
+- ***N - Negotiable (Negociável):***
+A história US03 é negociável, porque, embora defina a capacidade de visualizar horários e realizar o agendamento, ela não especifica o método exato de agendamento (ex: calendário interativo vs. lista), a interface ou as regras detalhadas de bloqueio (ex: "agendamentos sucessivos"). Isso permite que a equipe de desenvolvimento debata e defina a melhor abordagem durante o planejamento.
 
-N - A história apresentada é negociável, porque ela é suficientemente genérica, não há nada definido ou fixo, por isso é perfeita para que seja debatida e definida a melhor abordagem pela a equipe de desenvolvimento.
+- **V - Valuable (Valiosa):**
+A User Story US03 é extremamente valiosa, pois representa o passo mais importante para a conclusão e resolução direta das dores da persona Eloísa (e de outros moradores). A capacidade de ver a disponibilidade e reservar uma sala garante que os usuários consigam planejar e ter um espaço garantido para estudar, resolvendo o problema central de desorganização e impactando positivamente a qualidade de vida no prédio.
 
-V - A história de usuário criada é extremamente valiosa, porque ela é um passo importante para conclusão e resolução diretamente das dores da personagem, a solução proposta na persona detalha o valor que essa funcionalidade trará.
+- **E - Estimable (Estimável):**
+Com as informações da história e o contexto do problema, a User Story US03 é altamente estimável. A equipe de desenvolvimento deverá analisar os requisitos de interface (front-end), a interação com o backend (API de agendamento) e o banco de dados para definir a abordagem técnica e estimar o esforço necessário para sua implementação.
 
-E - Com as informações da história e o contexto do problema, esse User Story é altamente estimável. A equipe de desenvolvimento deverá analisar, planejar e definir a abordagem que será utilizada para que a estimativa seja feita.
+- **S - Small (Pequena):**
+A User Story US03 representa a funcionalidade específica de visualizar os horários disponíveis e realizar o agendamento de salinhas particulares. Ela é uma parte importante do sistema completo e, idealmente, é uma tarefa que pode ser desenvolvida e entregue em uma única sprint. No entanto, se a análise detalhada revelar alta complexidade, essa história pode ser desmembrada em histórias menores e mais focadas, como "Visualizar disponibilidade das salas" e "Agendar uma sala em um horário específico", para garantir um trabalho gerenciável e entregas incrementais.
 
-S - Representa a funcionalidade específica de visualizar os horários disponíveis para agendamento das salinhas particulares. Ela representa um parte específica e importante do sistema completo, é um tarefa que pode ser incrementada em uma única sprint.
+- **T - Testable (Testável):**
+A User Story US03 é testável, e seus critérios de aceite podem ser definidos claramente a partir da história e das dores da persona Eloísa. Exemplos de critérios de aceite incluem:
+  - O morador deve conseguir visualizar um calendário ou lista com a disponibilidade atual das salinhas.
 
-A implementação dessa funcionalidade pode envolver diversas tarefas complexas. Para garantir que o trabalho seja gerenciável e entregue valor incrementalmente em cada sprint, pode ser necessário dividir essa história em histórias menores e mais focadas, como a capacidade de visualizar a disponibilidade das salas, a ação de agendar um horário específico e a funcionalidade de cancelar um agendamento.
+  - O morador deve conseguir selecionar uma data e hora e efetivar a reserva de uma salinha.
 
-T - Ela é testável, os critérios de aceite podem ser definidos claramente a partir da história e das dores de Eloísa. Por exemplo: A estudante deve conseguir selecionar uma data e hora para agendar uma salinha., Outros moradores devem poder visualizar os horários agendados (dependendo dos requisitos).
+  - O sistema deve impedir agendamentos em horários já ocupados ou que excedam os limites de agendamento.
+
+  - Após o agendamento bem-sucedido, o morador deve receber uma confirmação na plataforma.
+
 
 ---
 
@@ -75,7 +94,7 @@ T - Ela é testável, os critérios de aceite podem ser definidos claramente a p
 ### Modelo lógico do banco de dados
 <div align="center">
   <sub></sub><br>
-  <img src="assets/modeloLogico.png" width="50%">
+  <img src="../assets/modeloLogico.png" width="50%">
 </div>
 
 ### Modelo físico do banco de dados
@@ -91,7 +110,7 @@ O esquema de arquitetura MVC (Model-View-Controller) é uma representação visu
 
 <div align="center">
   <sub></sub><br>
-  <img src="assets/diagramaMvc.png" width="100%">
+  <img src="../assets/diagramaMvc.png" width="100%">
 </div>
 
 ### **•View (Visão)**
@@ -162,7 +181,7 @@ A terceira área corresponde ao Modelo, que representa a camada de dados da apli
 **User Storie:** Não está associada a nenhuma US.
 <div align="center">
   <sub>Wireframe tela 1</sub><br>
-  <img src="assets/Tela1.png" width="20%">
+  <img src="../assets/Tela1.png" width="20%">
 </div>
 
 <p>A tela de login é essencial para o acesso dos moradores à plataforma de agendamento das salas de estudo do prédio. O e-mail cadastrado no sistema do edifício deve ser utilizado para entrar.
@@ -173,7 +192,7 @@ A terceira área corresponde ao Modelo, que representa a camada de dados da apli
 - "Como uma estudante de medicina e moradora do prédio, quero poder ver os horários disponível de agendamento das salinhas particulares para que eu consiga organizar meus estudos."
 <div align="center">
   <sub>Wireframe tela 2</sub><br>
-  <img src="assets/Tela2.png" width="20%">
+  <img src="../assets/Tela2.png" width="20%">
 </div>
 
 <p>A tela de agendamento é fundamental para otimizar a experiência dos estudantes nos espaços de estudo, pois permite visualizar os dias com os horários disponíveis, selecionar a sala desejada e agendar horários com bastante antecedência. Observa-se que os horários são marcados de 4 em 4 horas, um tempo perfeito para estudar todo o conteúdo com amigos ou individualmente. Dessa forma, soluciona completamente a questão levantada, pois resolve com eficiência a demanda da Eloisa de ver os dias e horários livres das salinhas de estudo, que ficam visíveis na parte inferior do wireframe (horários sem marcação).
@@ -185,7 +204,7 @@ A terceira área corresponde ao Modelo, que representa a camada de dados da apli
 - "Como moradora, eu quero poder ver eventos que irão interditar as salas para que eu consiga organizar minha rotina".
 <div align="center">
   <sub>Wireframe tela 3</sub><br>
-  <img src="assets/Tela3.png" width="20%">
+  <img src="../assets/Tela3.png" width="20%">
 </div>
 
 <p>A tela de confirmação é um passo importante para nossa plataforma. Nela, é possível visualizar a data, o horário, as regras de uso e os eventos que poderiam interditar a sala de estudo. Desse modo, soluciona com clareza as dúvidas da Eloisa sobre possíveis interdições das salinhas, como uma detetização, e as normas de convivência do local.
@@ -197,7 +216,7 @@ A terceira área corresponde ao Modelo, que representa a camada de dados da apli
 
 
 
-### 3.4. Guia de estilos (Semana 05)
+### 3.4. Guia de estilos 
 
 
 ## Guia de Estilo – Arara Azul (Mobile)
@@ -360,23 +379,51 @@ Aplicativo mobile para reserva de salas de estudo do prédio **Arara Azul**, exc
 
 
 
-### 3.5. Protótipo de Alta Fidelidade (Semana 05)
+### 3.5. Protótipo de Alta Fidelidade 
 
 | Tela de Login | Tela de Agendamento | Tela de Confirmação |
 | :------------: | :------------------: | :-----------------: |
-| ![Tela 1](assets/altaTela1.png) | ![Tela 2](assets/altaTela2.png) | ![Tela 3](assets/altaTela3.png) |
+| ![Tela 1](../assets/altaTela1.png) | ![Tela 2](../assets/altaTela2.png) | ![Tela 3](../assets/altaTela3.png) |
 
 🔗 **Link do Figma:** [Acessar protótipo](https://www.figma.com/design/6vGv5QEdLNycb3QFHrQ7h8/Untitled?node-id=0-1&t=BKp1rVrURdjMeIUL-1)
 
 
-### 3.6. WebAPI e endpoints (Semana 05)
+### 3.6. WebAPI e endpoints 
 
 [Clique aqui para acessar o detalhamento de cada endopoint aplicada para o funcionamento do projeto](detalhamento_endpoints.md)
 
-### 3.7 Interface e Navegação (Semana 07)
+### 3.7 Interface e Navegação 
 
-*Descreva e ilustre aqui o desenvolvimento do frontend do sistema web, explicando brevemente o que foi entregue em termos de código e sistema. Utilize prints de tela para ilustrar.*
+-------------------------
+Nesta etapa do projeto, o frontend do sistema web foi desenvolvido, focando nas telas de login, agendamento e confirmação. Utilizamos EJS, CSS e JavaScript para criar uma interface funcional, bonita e interativa, que materializa a idealização dos protótipos de alta fidelidade, conectando o usuário à complexa arquitetura de backend.
 
+## Pagina de login
+<div align="center">
+  <sub>Tela de login do sistema web</sub><br>
+  <img src="../assets/altaTela1.png" width="20%">
+</div>
+
+A tela de login é a entrada principal da plataforma Arara Azul, com design limpo e seguro. Apresenta campos para "E-mail" e "Senha", e um botão "Login" proeminente. Priorizando a simplicidade e eficiência, ela se integra ao loginController para processar credenciais, fornecendo feedback visual rápido e garantindo responsividade em diversos dispositivos via CSS e JavaScript.
+
+## Agendamentos
+
+<div align="center">
+  <sub>Tela de agendamentos do sistema web</sub><br>
+  <img src="../assets/altaTela2.png" width="20%">
+</div>
+
+Esta tela central permite ao morador selecionar a data e o horário desejado para as salinhas de estudo. Exibe um calendário interativo para a escolha da data e, abaixo, os horários disponíveis para seleção. A página também apresenta uma área de "Avisos" com as regras do prédio. O botão "Continuar" serve para prosseguir com a seleção para uma confirmação posterior, não efetivando a reserva diretamente nesta etapa. O design visa clareza e facilidade na escolha do período de uso.
+
+## Página de Confirmação de Agendamento
+<div align="center">
+  <sub>Tela de confirmação de agendamento do sistema web</sub><br>
+  <img src="../assets/altaTela3.png" width="20%">
+</div>
+
+A tela de confirmação exibe os detalhes da reserva (Sala, Data, Horário) para revisão final. Inclui um checkbox e aviso sobre as "Regras de uso", exigindo que o morador as aceite. O botão "Reservar" finaliza o agendamento, tornando-o oficial. O design visa clareza e consentimento do usuário.
+
+
+<img > 
 ---
 
 ## <a name="c4"></a>4. Desenvolvimento da Aplicação Web (Semana 8)
@@ -386,16 +433,50 @@ Aplicativo mobile para reserva de salas de estudo do prédio **Arara Azul**, exc
 *VIDEO: Insira o link do vídeo demonstrativo nesta seção*
 *Descreva e ilustre aqui o desenvolvimento do sistema web completo, explicando brevemente o que foi entregue em termos de código e sistema. Utilize prints de tela para ilustrar.*
 
-### 4.2 Conclusões e Trabalhos Futuros (Semana 8)
+### 4.2 Conclusões e Trabalhos Futuros 
 
-*Indique pontos fortes e pontos a melhorar de maneira geral.*
-*Relacione também quaisquer outras ideias que você tenha para melhorias futuras.*
+### pontos fortes da minha aplicação web
+- **1. Adesão ao Problema Central:** A plataforma foi diretamente desenvolvida para solucionar a dor primordial dos moradores, exemplificada pela persona Eloísa: a dificuldade em encontrar e garantir um espaço de estudo. O sistema de agendamento aborda essa necessidade de previsibilidade e acesso justo.
+
+- **2. Design Centrado no Usuário:** A criação da persona e a aplicação das Heurísticas de Nielsen demonstraram um compromisso com a experiência do usuário. As telas de login, agendamento e confirmação foram projetadas para serem intuitivas e claras, facilitando a interação dos moradores com o sistema.
+
+- **3. Estrutura de Código Modular:** A organização em controladores e rotas, juntamente com o uso de EJS, CSS e JavaScript, cria uma arquitetura modular e de fácil manutenção, preparando o terreno para futuras expansões.
+
+- **4. Utilização de Metodologia Ágil:** A aplicação do Método INVEST na validação das User Stories reforça uma abordagem de desenvolvimento que prioriza a entrega de valor incremental e a adaptabilidade às necessidades do projeto.
+
+### Planos Futuros
+- **1. Implementação de Testes de Integração:** Desenvolver testes que simulem a interação completa do frontend com o backend e o banco de dados, garantindo a integridade das operações de agendamento e a persistência das informações.
+
+- **2. Gerenciamento Completo de Agendamentos:**
+  - **Cancelamento e Edição:** Funcionalidade para que os moradores possam cancelar ou modificar seus próprios agendamentos.
+
+  - **Histórico de Reservas:** Uma seção no perfil do morador que exiba todas as suas reservas passadas e futuras.
+
+- **3. Sistema de Notificações:**
+
+  - **Lembretes de Agendamento:** Notificações automáticas (via plataforma ou e-mail/push, se aplicável) para lembrar o usuário de um agendamento próximo.
+
+  - **Alertas de Mudanças:** Notificações sobre interdições inesperadas ou mudanças nas regras das salas.
+
+- **4. Painel Administrativo/Portaria:** Desenvolver uma interface restrita para os administradores do prédio (ex: portaria), permitindo:
+  - **Visualizar todos os agendamentos.**
+  - **Bloquear salas para manutenção.**
+  - **Gerenciar regras de uso e usuários.**
+  - **Acessar relatórios de utilização das salinhas.**
+
+- **5. Funcionalidades de Acessibilidade e Responsividade:** Aprimorar a acessibilidade da interface para garantir que a plataforma seja utilizável por todos, independentemente de suas necessidades especiais. Refinar a responsividade para uma experiência impecável em dispositivos móveis e tablets.
+
+- **Versão Mobile/Responsividade Aprimorada:** Otimizar a interface para garantir uma experiência de usuário fluida e responsiva em dispositivos móveis (smartphones e tablets), adaptando o layout e os elementos interativos para diferentes tamanhos de tela.
+
 
 
 
 ## <a name="c5"></a>5. Referências
 
-_Incluir as principais referências de seu projeto, para que seu parceiro possa consultar caso ele se interessar em aprofundar. Um exemplo de referência de livro e de site:_<br>
+Esta seção tem como objetivo apresentar as fontes de informação e as inspirações que guiaram o desenvolvimento do projeto. A pesquisa e a análise de soluções existentes são fundamentais para embasar as decisões de design e funcionalidade, garantindo que o produto final seja eficaz e alinhado às expectativas dos usuários.
+
+### **Aplicativo Apepê** 
+A área de agendamento de salas do aplicativo Apepê serviu como uma inspiração fundamental para a concepção da interface e fluxo de agendamento das salinhas de estudo no prédio Arara Azul. Sua abordagem à usabilidade e organização de horários foi um modelo para a funcionalidade central da nossa plataforma.
 
 ---
 ---

@@ -97,8 +97,12 @@ nav a:hover, nav a.active {
 }
 
 .sala-card.selected {
-  background-color: #c0c0c0;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 5px #fff600;
+}
+
+.mouse {
+  cursor: pointer;
+  border: 2px solid #fff600;
 }
 
 .sala-icon {
@@ -292,6 +296,19 @@ nav a:hover, nav a.active {
   border: 2px solid black; /* Borda preta */
 }
 
+.horario-btn.indisponivel {
+  background-color: #888;
+  color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.horario-btn.indisponivel:hover {
+  background-color: #888;
+  transform: none;
+}
+
 /* Avisos */
 .avisos-container {
   background-color: white;
@@ -313,7 +330,7 @@ nav a:hover, nav a.active {
   font-size: 12px;
   line-height: 1.4;
   color: black;
-  text-align: right; /* Alinhamento à direita como na imagem */
+  text-align: left; /* Alinhamento à direita como na imagem */
 }
 
 .avisos-conteudo p {
