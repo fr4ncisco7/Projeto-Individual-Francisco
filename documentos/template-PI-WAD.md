@@ -39,7 +39,6 @@ Eloísa necessita da capacidade de planejar e reservar com antecedência um espa
 Ao chegar da faculdade, geralmente por volta das 16h, Eloísa frequentemente se depara com a indisponibilidade e o uso inadequado das salinhas de estudo. A ausência de um sistema de agendamento claro resulta em situações caóticas: moradores ocupam as salas por períodos excessivos, por vezes desde o meio-dia, impedindo o rodízio. Além disso, sem uma gestão adequada, esses espaços são desvirtuados do seu propósito, utilizados para lazer como jogos eletrônicos, o que prejudica o ambiente acadêmico. Há também a frustração com a "ocupação fantasma", onde as salinhas estão cheias de pertences como mochilas e cadernos, mas sem pessoas presentes, resultando em espaços bloqueados e inutilizados. Consequentemente, a falta de um mecanismo de reserva eficaz impede Eloísa de encontrar um espaço adequado e com privacidade para realizar seus estudos e de se encontrar com suas amigas para sessões de estudo em grupo ou para tirar dúvidas, afetando diretamente suas notas. A necessidade constante de "correr" para tentar pegar uma sala e a frustração de não encontrar ambientes disponíveis devido à ausência de organização prévia geram um impacto negativo em seu bem-estar e na sua satisfação com o prédio Arara Azul.
 
 ### **Solução Proposta**
-(Sistema de Agendamento de Salinhas)
 Com a implementação do sistema de agendamento das salinhas de estudo, proposta por Francisco, os alunos terão acesso a esses espaços de forma organizada e com regras claras.
 
 - **Acesso Controlado por Agendamento:** Garante que apenas usuários com agendamento possam utilizar as salas, eliminando a ocupação indevida.
@@ -466,7 +465,7 @@ A tela de confirmação exibe os detalhes da reserva (Sala, Data, Horário) para
 
 - **5. Funcionalidades de Acessibilidade e Responsividade:** Aprimorar a acessibilidade da interface para garantir que a plataforma seja utilizável por todos, independentemente de suas necessidades especiais. Refinar a responsividade para uma experiência impecável em dispositivos móveis e tablets.
 
-- **Versão Mobile/Responsividade Aprimorada:** Otimizar a interface para garantir uma experiência de usuário fluida e responsiva em dispositivos móveis (smartphones e tablets), adaptando o layout e os elementos interativos para diferentes tamanhos de tela.
+- **6. Versão Mobile/Responsividade Aprimorada:** Otimizar a interface para garantir uma experiência de usuário fluida e responsiva em dispositivos móveis (smartphones e tablets), adaptando o layout e os elementos interativos para diferentes tamanhos de tela.
 
 
 
