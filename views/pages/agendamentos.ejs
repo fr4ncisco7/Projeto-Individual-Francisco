@@ -140,11 +140,39 @@
         gerarCalendario(mesAtual, anoAtual);
       });
       
+      // Selecionar a sala 1 automaticamente ao carregar a página
+      setTimeout(() => {
+        // Selecionar a primeira sala (Sala 1)
+        const salas = document.querySelectorAll('.sala-card');
+        if (salas.length > 0) {
+          // Remover seleção de todas as salas primeiro
+          salas.forEach(sala => sala.classList.remove('selected'));
+          
+          // Selecionar a primeira sala
+          const primeiraSala = salas[0];
+          primeiraSala.classList.add('selected');
+          
+          // Se já tiver um dia selecionado, carregar os horários para a sala 1
+          const diaSelecionado = document.querySelector('.calendario-dia.selected');
+          if (diaSelecionado) {
+            const dia = parseInt(diaSelecionado.textContent);
+            carregarHorariosDisponiveis(dia, mesAtual, anoAtual);
+          }
+        }
+      }, 100); // Pequeno delay para garantir que os elementos foram renderizados
+      
       // Event listeners para seleção de sala
       document.querySelectorAll('.sala-card').forEach(sala => {
         sala.addEventListener('click', () => {
           document.querySelectorAll('.sala-card').forEach(s => s.classList.remove('selected'));
           sala.classList.add('selected');
+          
+          // Recarregar horários para a sala selecionada
+          const diaSelecionado = document.querySelector('.calendario-dia.selected');
+          if (diaSelecionado) {
+            const dia = parseInt(diaSelecionado.textContent);
+            carregarHorariosDisponiveis(dia, mesAtual, anoAtual);
+          }
         });
       });
       
