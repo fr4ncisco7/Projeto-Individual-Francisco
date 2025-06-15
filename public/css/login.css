@@ -127,3 +127,7 @@ input:focus {
 .register-link a:hover {
   text-decoration: underline;
 }
+
+#localDaFoto {
+  text-align: center;
+}

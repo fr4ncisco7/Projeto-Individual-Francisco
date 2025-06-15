@@ -201,15 +201,15 @@ exports.listarAgendamentos = async (req, res) => {
         const query = `
             SELECT
                 a.id,
-                a.usuarios_id,
-                a.data_hora_inicio,
-                a.data_hora_fim,
+                a.usuario_id,
+                a.data_inicio,
+                a.data_fim,
                 json_agg(json_build_object('id', s.id, 'nome', s.nome)) AS salas_agendadas
             FROM agendamentos a
             LEFT JOIN salas_agendamentos sa ON a.id = sa.agendamentos_id -- 'agendamentos_id' aqui
             LEFT JOIN salas s ON sa.salas_id = s.id -- 'salas_id' aqui
             GROUP BY a.id
-            ORDER BY a.data_hora_inicio;
+            ORDER BY a.data_inicio;
         `;
         const result = await pool.query(query);
         res.status(200).json(result.rows);
@@ -226,9 +226,9 @@ exports.getAgendamentoById = async (req, res) => {
         const query = `
             SELECT
                 a.id,
-                a.usuarios_id,
-                a.data_hora_inicio,
-                a.data_hora_fim,
+                a.usuario_id,
+                a.data_inicio,
+                a.data_fim,
                 json_agg(json_build_object('id', s.id, 'nome', s.nome)) AS salas_agendadas
             FROM agendamentos a
             LEFT JOIN salas_agendamentos sa ON a.id = sa.agendamentos_id
@@ -334,9 +334,9 @@ exports.atualizarAgendamento = async (req, res) => {
         const updatedAgendamento = await client.query(`
             SELECT
                 a.id,
-                a.usuarios_id,
-                a.data_hora_inicio,
-                a.data_hora_fim,
+                a.usuario_id,
+                a.data_inicio,
+                a.data_fim,
                 json_agg(json_build_object('id', s.id, 'nome', s.nome)) AS salas_agendadas
             FROM agendamentos a
             LEFT JOIN salas_agendamentos sa ON a.id = sa.agendamentos_id

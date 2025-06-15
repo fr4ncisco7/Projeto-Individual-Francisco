@@ -399,7 +399,7 @@ Nesta etapa do projeto, o frontend do sistema web foi desenvolvido, focando nas 
 ## Pagina de login
 <div align="center">
   <sub>Tela de login do sistema web</sub><br>
-  <img src="../assets/altaTela1.png" width="20%">
+  <img src="../assets/loginWeb.png" width="80%">
 </div>
 
 A tela de login é a entrada principal da plataforma Arara Azul, com design limpo e seguro. Apresenta campos para "E-mail" e "Senha", e um botão "Login" proeminente. Priorizando a simplicidade e eficiência, ela se integra ao loginController para processar credenciais, fornecendo feedback visual rápido e garantindo responsividade em diversos dispositivos via CSS e JavaScript.
@@ -408,7 +408,7 @@ A tela de login é a entrada principal da plataforma Arara Azul, com design limp
 
 <div align="center">
   <sub>Tela de agendamentos do sistema web</sub><br>
-  <img src="../assets/altaTela2.png" width="20%">
+  <img src="../assets/altaTela2.png" width="80%">
 </div>
 
 Esta tela central permite ao morador selecionar a data e o horário desejado para as salinhas de estudo. Exibe um calendário interativo para a escolha da data e, abaixo, os horários disponíveis para seleção. A página também apresenta uma área de "Avisos" com as regras do prédio. O botão "Continuar" serve para prosseguir com a seleção para uma confirmação posterior, não efetivando a reserva diretamente nesta etapa. O design visa clareza e facilidade na escolha do período de uso.
@@ -416,7 +416,7 @@ Esta tela central permite ao morador selecionar a data e o horário desejado par
 ## Página de Confirmação de Agendamento
 <div align="center">
   <sub>Tela de confirmação de agendamento do sistema web</sub><br>
-  <img src="../assets/altaTela3.png" width="20%">
+  <img src="../assets/altaTela3.png" width="80%">
 </div>
 
 A tela de confirmação exibe os detalhes da reserva (Sala, Data, Horário) para revisão final. Inclui um checkbox e aviso sobre as "Regras de uso", exigindo que o morador as aceite. O botão "Reservar" finaliza o agendamento, tornando-o oficial. O design visa clareza e consentimento do usuário.

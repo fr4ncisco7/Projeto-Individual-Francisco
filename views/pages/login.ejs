@@ -9,8 +9,7 @@
 <body>
   <div class="login-container">
     <div class="login-card">
-      <h1>Acesso ao Sistema</h1>
-      <h2>Edifício Arara Azul</h2>
+      <div id="localDaFoto"></div>
       
       <div id="login-message" class="message"></div>
       
@@ -32,9 +31,18 @@
     </div>
   </div>
 
-  <script>
+  <script>;
+    var divFoto = window.document.getElementById('localDaFoto')
+    var logo = window.document.createElement('img');
+    logo.setAttribute('id', 'imagemLogo');
+    logo.setAttribute('src', '/images/logoAraraAzul.png');
+    logo.setAttribute('alt', 'Imagem do logo da empresa');
+    divFoto.appendChild(logo);
+    
+
     document.getElementById('login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
+
       
       const email = document.getElementById('email').value;
       const senha = document.getElementById('senha').value;
