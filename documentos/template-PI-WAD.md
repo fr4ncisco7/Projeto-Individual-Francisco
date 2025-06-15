@@ -174,7 +174,7 @@ A terceira área corresponde ao Modelo, que representa a camada de dados da apli
 - Dia_Agendado: A data em que o agendamento foi efetivamente registrado no sistema. Este Model é acessado pelo Controller de Agendamentos para criar novos agendamentos, consultar agendamentos existentes (para verificar disponibilidade ou listar agendamentos de um usuário), atualizar horários ou cancelar agendamentos. Ele desempenha um papel crucial na lógica de verificação de conflitos de horário.
   
 
-### 3.3. Wireframes (Semana 03)
+### 3.3. Wireframes 
 
 ### **Tela de login**
 **User Storie:** Não está associada a nenhuma US.
@@ -408,7 +408,11 @@ A tela de login é a entrada principal da plataforma Arara Azul, com design limp
 
 <div align="center">
   <sub>Tela de agendamentos do sistema web</sub><br>
-  <img src="../assets/altaTela2.png" width="80%">
+  <img src="../assets/agendamentoWeb1.png"
+  width="80%"
+
+  <img src="../assets/agendamentoWeb2.png"
+  width="80%">
 </div>
 
 Esta tela central permite ao morador selecionar a data e o horário desejado para as salinhas de estudo. Exibe um calendário interativo para a escolha da data e, abaixo, os horários disponíveis para seleção. A página também apresenta uma área de "Avisos" com as regras do prédio. O botão "Continuar" serve para prosseguir com a seleção para uma confirmação posterior, não efetivando a reserva diretamente nesta etapa. O design visa clareza e facilidade na escolha do período de uso.
@@ -416,7 +420,11 @@ Esta tela central permite ao morador selecionar a data e o horário desejado par
 ## Página de Confirmação de Agendamento
 <div align="center">
   <sub>Tela de confirmação de agendamento do sistema web</sub><br>
-  <img src="../assets/altaTela3.png" width="80%">
+  <img src="../assets/confirmacaoAgendamentoWeb1.png"
+  width="80%"
+
+  <img src="../assets/confirmacaoAgendamentoWeb2.png"
+  width="80%">
 </div>
 
 A tela de confirmação exibe os detalhes da reserva (Sala, Data, Horário) para revisão final. Inclui um checkbox e aviso sobre as "Regras de uso", exigindo que o morador as aceite. O botão "Reservar" finaliza o agendamento, tornando-o oficial. O design visa clareza e consentimento do usuário.
@@ -427,7 +435,7 @@ A tela de confirmação exibe os detalhes da reserva (Sala, Data, Horário) para
 
 ## <a name="c4"></a>4. Desenvolvimento da Aplicação Web (Semana 8)
 
-### 4.1 Demonstração do Sistema Web (Semana 8)
+### 4.1 Demonstração do Sistema Web 
 
 *VIDEO: Insira o link do vídeo demonstrativo nesta seção*
 *Descreva e ilustre aqui o desenvolvimento do sistema web completo, explicando brevemente o que foi entregue em termos de código e sistema. Utilize prints de tela para ilustrar.*
@@ -467,6 +475,30 @@ A tela de confirmação exibe os detalhes da reserva (Sala, Data, Horário) para
 
 - **6. Versão Mobile/Responsividade Aprimorada:** Otimizar a interface para garantir uma experiência de usuário fluida e responsiva em dispositivos móveis (smartphones e tablets), adaptando o layout e os elementos interativos para diferentes tamanhos de tela.
 
+### 4.3 Tecnologias Utilizadas no Projeto
+Este projeto de sistema de agendamento de salas foi construído utilizando um conjunto de tecnologias modernas e robustas, organizadas para garantir eficiência, escalabilidade e uma boa experiência de desenvolvimento e uso.
+
+### Linguagem de Programação
+
+* **JavaScript (Node.js):** A principal linguagem de programação utilizada em todo o projeto, tanto no backend quanto no frontend (via JavaScript no navegador). Node.js permite a construção de aplicações full-stack com uma única linguagem.
+
+### Backend
+
+* **Express.js:** Um framework de aplicação web minimalista e flexível para Node.js. Ele é responsável por gerenciar as rotas, requisições HTTP e respostas do servidor, formando a base da arquitetura MVC.
+* **Nodemon:** Uma ferramenta de desenvolvimento que monitora alterações nos arquivos do projeto e reinicia automaticamente o servidor Node.js, agilizando o ciclo de desenvolvimento.
+* **CORS:** Um pacote Node.js para habilitar o Cross-Origin Resource Sharing (CORS), permitindo que o servidor aceite requisições de diferentes origens (domínios), o que é comum em arquiteturas com frontend e backend separados ou durante o desenvolvimento local.
+
+### Frontend
+
+* **HTML:** A linguagem de marcação padrão para criar a estrutura das páginas web do sistema.
+* **CSS:** Utilizado para estilizar as páginas HTML, garantindo um design visualmente atraente e responsivo para o sistema de agendamento.
+* **EJS (Embedded JavaScript):** Um motor de templates que permite embutir código JavaScript diretamente no HTML, facilitando a renderização de páginas dinâmicas no lado do servidor.
+* **JavaScript (Browser):** Responsável por toda a interatividade no lado do cliente, incluindo a lógica do calendário, seleção de horários, comunicação assíncrona com o backend (via `fetch`) para verificar a disponibilidade de agendamentos e a exibição de mensagens de feedback.
+
+### Banco de Dados
+
+* **PostgreSQL:** Um sistema de gerenciamento de banco de dados relacional objeto-orientado (ORDBMS) robusto, confiável e de código aberto. É utilizado para armazenar todos os dados do sistema, como informações de usuários, salas e agendamentos.
+* **`pg`:** O cliente oficial do Node.js para PostgreSQL, utilizado para estabelecer a conexão e executar as operações no banco de dados.
 
 
 
