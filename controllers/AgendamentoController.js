@@ -39,6 +39,8 @@ exports.verificarDisponibilidade = async (req, res) => {
   try {
     const { sala_id, data, hora } = req.query;
     
+    console.log('Verificando disponibilidade:', { sala_id, data, hora });
+    
     if (!sala_id || !data || hora === undefined) {
       return res.status(400).json({ error: 'Sala, data e hora são obrigatórios para verificar disponibilidade.' });
     }
@@ -47,6 +49,9 @@ exports.verificarDisponibilidade = async (req, res) => {
     const dataHoraInicio = new Date(`${data}T${hora.toString().padStart(2, '0')}:00:00`);
     const dataHoraFim = new Date(dataHoraInicio);
     dataHoraFim.setHours(dataHoraFim.getHours() + 4); // Bloco de 4 horas
+    
+    console.log('Data/hora início:', dataHoraInicio);
+    console.log('Data/hora fim:', dataHoraFim);
     
     // Verificar se a data/hora já passou
     const agora = new Date();
@@ -58,6 +63,7 @@ exports.verificarDisponibilidade = async (req, res) => {
       dataHoraInicio.getFullYear() === agora.getFullYear() && 
       parseInt(hora) <= agora.getHours()
     ) {
+      console.log('Horário já passou');
       return res.json({ disponivel: false, motivo: 'horario_passado' });
     }
     
@@ -66,6 +72,7 @@ exports.verificarDisponibilidade = async (req, res) => {
     const dataVerificar = new Date(dataHoraInicio.getFullYear(), dataHoraInicio.getMonth(), dataHoraInicio.getDate());
     
     if (dataVerificar < hoje) {
+      console.log('Data já passou');
       return res.json({ disponivel: false, motivo: 'data_passada' });
     }
     
@@ -81,9 +88,12 @@ exports.verificarDisponibilidade = async (req, res) => {
     `;
     
     const result = await pool.query(query, [sala_id, dataHoraInicio, dataHoraFim]);
+    console.log('Agendamentos encontrados:', result.rows.length);
     
     // Se encontrou algum agendamento, a sala não está disponível
     const disponivel = result.rows.length === 0;
+    
+    console.log('Disponibilidade:', disponivel);
     
     return res.json({ 
       disponivel, 
@@ -98,19 +108,21 @@ exports.verificarDisponibilidade = async (req, res) => {
 // Criar um novo agendamento
 exports.criarAgendamento = async (req, res) => {
   try {
-    const { sala_id, data_inicio, titulo, descricao } = req.body;
-    const usuario_id = req.session?.usuario?.id || 1; // Usar ID do usuário da sessão ou um padrão para testes
+    console.log('Dados recebidos para criar agendamento:', req.body);
     
-    // Validações básicas
-    if (!usuario_id || !sala_id || !data_inicio || !titulo) {
-      return res.status(400).json({ 
-        error: 'Dados incompletos. Usuário, sala, data de início e título são obrigatórios.' 
-      });
-    }
+    const { sala_id, data_inicio, descricao } = req.body;
+    // Usar ID do usuário da sessão ou um padrão para testes
+    const usuario_id = req.session?.usuario?.id || 1;
     
+    console.log('Processando agendamento para usuário:', usuario_id);
+    
+   
     // Extrair a hora da data_inicio
     const dataInicioObj = new Date(data_inicio);
     const hora = dataInicioObj.getHours();
+    
+    console.log('Data de início:', dataInicioObj);
+    console.log('Hora:', hora);
     
     // Validar se a hora está em blocos de 4 horas (00, 04, 08, 12, 16, 20)
     if (![0, 4, 8, 12, 16, 20].includes(hora)) {
@@ -141,6 +153,8 @@ exports.criarAgendamento = async (req, res) => {
     const dataFim = new Date(dataInicioObj);
     dataFim.setHours(dataFim.getHours() + 4);
     
+    console.log('Data de fim:', dataFim);
+    
     // Verificar disponibilidade
     const query = `
       SELECT * FROM agendamentos 
@@ -159,39 +173,23 @@ exports.criarAgendamento = async (req, res) => {
       return res.status(400).json({ error: 'Esta sala já está agendada para o horário selecionado.' });
     }
     
-    // Verificar limite de 4 agendamentos por semana
-    const inicioSemana = new Date(dataInicioObj);
-    inicioSemana.setDate(inicioSemana.getDate() - inicioSemana.getDay()); // Domingo
-    inicioSemana.setHours(0, 0, 0, 0);
-    
-    const fimSemana = new Date(inicioSemana);
-    fimSemana.setDate(fimSemana.getDate() + 6); // Sábado
-    fimSemana.setHours(23, 59, 59, 999);
-    
-    const agendamentosSemanais = await pool.query(
-      'SELECT COUNT(*) FROM agendamentos WHERE usuario_id = $1 AND data_inicio >= $2 AND data_inicio <= $3',
-      [usuario_id, inicioSemana, fimSemana]
-    );
-    
-    if (parseInt(agendamentosSemanais.rows[0].count) >= 4) {
-      return res.status(400).json({ error: 'Você já atingiu o limite de 4 agendamentos por semana.' });
-    }
-    
     // Criar o agendamento
     const insertQuery = `
-      INSERT INTO agendamentos (usuario_id, sala_id, data_inicio, data_fim, titulo, descricao)
-      VALUES ($1, $2, $3, $4, $5, $6)
+      INSERT INTO agendamentos (usuario_id, sala_id, data_inicio, data_fim, descricao)
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *
     `;
     
     const novoAgendamento = await pool.query(insertQuery, [
-      usuario_id, sala_id, dataInicioObj, dataFim, titulo, descricao
+      usuario_id, sala_id, dataInicioObj, dataFim, descricao
     ]);
+    
+    console.log('Agendamento criado com sucesso:', novoAgendamento.rows[0]);
     
     return res.status(201).json(novoAgendamento.rows[0]);
   } catch (error) {
     console.error('Erro ao criar agendamento:', error);
-    return res.status(500).json({ error: 'Erro ao criar agendamento.' });
+    return res.status(500).json({ error: 'Erro ao criar agendamento: ' + error.message });
   }
 };
 

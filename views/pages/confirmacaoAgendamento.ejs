@@ -80,15 +80,24 @@
         
         // Converter para formato ISO
         const [dia, mes, ano] = dataTexto.split('/');
-        const hora = horarioTexto.split(':')[0];
-        const data_inicio = `${ano}-${mes}-${dia}T${hora}:00:00`;
+        const hora = parseInt(horarioTexto.split(':')[0]);
+        const data_inicio = `${ano}-${mes}-${dia}T${hora.toString().padStart(2, '0')}:00:00`;
+        
+        console.log('Verificando disponibilidade para:', {sala_id, data: `${ano}-${mes}-${dia}`, hora});
         
         // Verificar disponibilidade antes de enviar
         fetch(`/api/agendamentos/verificar-disponibilidade?sala_id=${sala_id}&data=${ano}-${mes}-${dia}&hora=${hora}`)
-          .then(response => response.json())
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Erro na resposta do servidor');
+            }
+            return response.json();
+          })
           .then(data => {
+            console.log('Resposta da verificação:', data);
+            
             if (!data.disponivel) {
-              alert('Este horário não está mais disponível. Por favor, escolha outro horário.');
+              alert(`Este horário não está mais disponível. Motivo: ${data.motivo || 'desconhecido'}`);
               window.location.href = '/agendamentos'; // Voltar para a tela de agendamento
               return;
             }
@@ -101,6 +110,8 @@
               descricao: 'Agendamento de sala de estudos'
             };
             
+            console.log('Enviando dados de agendamento:', dadosAgendamento);
+            
             // Enviar para o servidor
             fetch('/api/agendamentos', {
               method: 'POST',
@@ -110,12 +121,12 @@
               body: JSON.stringify(dadosAgendamento)
             })
             .then(response => {
-              if (response.ok) {
-                return response.json();
+              if (!response.ok) {
+                return response.json().then(err => {
+                  throw new Error(err.error || 'Erro ao fazer agendamento');
+                });
               }
-              return response.json().then(err => {
-                throw new Error(err.error || 'Erro ao fazer agendamento');
-              });
+              return response.json();
             })
             .then(data => {
               alert('Agendamento realizado com sucesso!');
@@ -123,10 +134,12 @@
             })
             .catch(error => {
               alert('Erro ao fazer agendamento: ' + error.message);
+              console.error('Erro detalhado:', error);
             });
           })
           .catch(error => {
             alert('Erro ao verificar disponibilidade: ' + error.message);
+            console.error('Erro detalhado:', error);
           });
       });
     });
