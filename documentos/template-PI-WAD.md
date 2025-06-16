@@ -433,12 +433,103 @@ A tela de confirmação exibe os detalhes da reserva (Sala, Data, Horário) para
 <img > 
 ---
 
-## <a name="c4"></a>4. Desenvolvimento da Aplicação Web (Semana 8)
+## <a name="c4"></a>4. Desenvolvimento da Aplicação Web 
 
 ### 4.1 Demonstração do Sistema Web 
 
-*VIDEO: Insira o link do vídeo demonstrativo nesta seção*
-*Descreva e ilustre aqui o desenvolvimento do sistema web completo, explicando brevemente o que foi entregue em termos de código e sistema. Utilize prints de tela para ilustrar.*
+### Desenvolvimento do Sistema Web Completo - Edifício Arara Azul
+
+Este seção tem como objetivo descrever e ilustrar o desenvolvimento do sistema web de agendamento de salas de estudo para o Edifício Arara Azul, detalhando as entregas em termos de código e funcionalidades, as tecnologias empregadas e os principais desafios superados.
+
+### 4.1.1 Visão Geral do Sistema
+O sistema de agendamento de salas de estudo do Edifício Arara Azul foi concebido para resolver a desorganização e os conflitos no uso desses espaços pelos moradores. Ao proporcionar uma plataforma online para visualização, agendamento e gerenciamento das salinhas, o projeto visa otimizar o tempo dos estudantes, garantir o acesso justo aos recursos e promover um ambiente de estudo mais harmonioso e produtivo.
+
+### 4.1.2 Desenvolvimento do Frontend: Interface e Navegação
+
+Nesta etapa crucial do projeto, concentramos nossos esforços no desenvolvimento das interfaces que os moradores do prédio irão interagir. O foco principal foi a construção das telas de **login**, **agendamento de salinhas** e **confirmação de agendamento**, que são a espinha dorsal da experiência do usuário na plataforma.
+
+Utilizamos uma combinação robusta de tecnologias: **HTML** para a estruturação das páginas, **CSS** para estilização (garantindo um design atraente e intuitivo), **EJS (Embedded JavaScript)** para a renderização dinâmica no lado do servidor e **JavaScript** para a interatividade no lado do cliente. Esta fase é vital, pois é onde toda a complexidade do backend se materializa em uma experiência funcional e agradável para o usuário, idealizando os protótipos de alta fidelidade criados anteriormente.
+
+### 4.1.2.1 Página de Login
+
+A tela de login é o ponto de entrada principal, projetada para ser intuitiva e segura. Ela apresenta campos claros para "E-mail" e "Senha" e um botão "Login" proeminente. O design visa a simplicidade e eficiência, permitindo que os moradores acessem suas contas rapidamente.
+
+<div align="center">
+  <sub>Tela de login do sistema web</sub><br>
+  <img src="../assets/loginWeb.png" width="80%">
+</div>
+
+### 4.1.2.2 Página de Agendamento
+
+Esta tela representa o coração do sistema, permitindo que os moradores visualizem a disponibilidade e selecionem horários para as salinhas de estudo. A interface é dominada por um **calendário interativo** que, ao carregar, **automaticamente seleciona o dia atual** e exibe os horários disponíveis. Ao selecionar uma sala e uma data, o sistema se comunica em tempo real com o backend para **verificar a disponibilidade de cada horário**. Horários já reservados por outros ou que já passaram ficam **visualmente indisponíveis e não podem ser selecionados**, evitando que os usuários percam tempo tentando reservar um slot ocupado. A página também incorpora uma área de "Avisos" com as regras do prédio.
+
+<div align="center">
+  <sub>Tela de agendamentos do sistema web</sub><br>
+  <img src="../assets/agendamentoWeb1.png"
+  width="80%"
+
+  <img src="../assets/agendamentoWeb2.png"
+  width="80%">
+</div>
+
+### 4.1.2.3 Página de Confirmação de Agendamento
+
+A tela de confirmação é a etapa final do processo de agendamento, onde o morador revisa os detalhes de sua reserva antes de finalizar. Ela exibe claramente a **Sala**, **Data** e **Horário** selecionados. Um elemento crucial é a seção "Regras de uso", acompanhada de um checkbox, que reforça a responsabilidade do usuário ao reservar o espaço, garantindo que o usuário esteja ciente e concorde com as condições de uso antes de finalizar a reserva.
+
+<div align="center">
+  <sub>Tela de confirmação de agendamento do sistema web</sub><br>
+  <img src="../assets/confirmacaoAgendamentoWeb1.png"
+  width="80%"
+
+  <img src="../assets/confirmacaoAgendamentoWeb2.png"
+  width="80%">
+</div>
+
+### 4.1.3 Desenvolvimento do Backend: Estrutura Técnica
+
+Por trás da interface amigável, o sistema conta com uma arquitetura bem definida e robusta, baseada no padrão MVC (Model-View-Controller).
+
+* **Node.js e Express.js:** O backend é construído com Node.js e o framework Express.js. Essa combinação permite um desenvolvimento ágil e escalável, com Express.js gerenciando as rotas, requisições HTTP e respostas do servidor.
+
+* **PostgreSQL:** Como banco de dados relacional, escolhemos o PostgreSQL, conhecido por sua confiabilidade e poder. A biblioteca `pg` é utilizada para a comunicação eficiente entre o Node.js e o banco de dados.
+
+* **Padrão MVC:** O projeto segue rigorosamente o padrão MVC:
+
+  * **Models:** Responsáveis pela lógica de negócio e interação direta com o banco de dados (ex: `usuarioModel.js` e a lógica de agendamento).
+
+  * **Views:** São os arquivos EJS, responsáveis pela apresentação dos dados ao usuário.
+
+  * **Controllers:** Gerenciam a lógica de requisições, processam dados, interagem com os Models e preparam os dados para as Views (ex: `AgendamentoController.js`, `LoginController.js`).
+
+* **Comunicação Frontend-Backend (Fetch API):** A integração entre o frontend e o backend é realizada através da `Fetch API` do JavaScript, permitindo a comunicação assíncrona. Isso é fundamental para funcionalidades como a verificação em tempo real da disponibilidade dos horários, onde o frontend envia requisições para o backend e atualiza a interface com base nas respostas do banco de dados.
+
+### 4.1.4 Principais Desafios Enfrentados e Soluções
+
+O desenvolvimento do projeto apresentou alguns desafios importantes, que foram superados com abordagens focadas e eficientes:
+
+* **Garantia da Disponibilidade em Tempo Real:**
+
+  * **Desafio:** O principal desafio foi assegurar que o sistema exibisse a disponibilidade das salas de forma precisa e em tempo real, evitando agendamentos duplos e fornecendo feedback visual imediato ao usuário.
+
+  * **Solução:** Implementamos uma lógica robusta no `AgendamentoController` do backend que verifica sobreposição de horários no banco de dados. No frontend, a função `verificarHorarioDisponivel` faz uma chamada `fetch` assíncrona a essa API, desabilitando automaticamente os botões de horários ocupados na interface.
+
+* **Erro de Coluna no Banco de Dados:**
+
+  * **Desafio:** Enfrentamos um erro persistente de "column 'titulo' does not exist" durante a criação de agendamentos.
+
+  * **Solução:** A investigação revelou um desalinhamento no número de placeholders (`$X`) na query SQL de inserção no `AgendamentoController.js`. A correção da query, ajustando o número de parâmetros, resolveu o problema e permitiu a inserção correta dos agendamentos.
+
+* **Melhoria da Experiência do Usuário (UI/UX):**
+
+  * **Desafio:** A interação inicial do usuário não era tão fluida, com o uso de `alert()`s bloqueantes e a falta de uma seleção inicial no calendário.
+
+  * **Solução:** Substituímos os `alert()`s por mensagens de feedback flutuantes e não-intrusivas. Além disso, implementamos a seleção automática do dia atual no calendário e o carregamento imediato dos horários para esse dia, tornando a navegação mais intuitiva e ágil desde o primeiro acesso.
+
+### 4.1.5. Conclusão
+
+O sistema de agendamento do Edifício Arara Azul representa um avanço significativo na gestão dos espaços de estudo. Através de um desenvolvimento que prioriza a usabilidade e a integração robusta entre frontend e backend, a plataforma entrega valor real aos moradores, promovendo organização, justiça e uma experiência otimizada para suas necessidades acadêmicas.
+
+
 
 ### 4.2 Conclusões e Trabalhos Futuros 
 
