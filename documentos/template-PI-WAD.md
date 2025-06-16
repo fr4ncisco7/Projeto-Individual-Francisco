@@ -98,7 +98,7 @@ A User Story US03 é testável, e seus critérios de aceite podem ser definidos 
 
 ### Modelo físico do banco de dados
 
-[Clique aqui para acessar o modelo físico do banco de dados](migrations/init.sql)
+[Clique aqui para acessar o modelo físico do banco de dados](/scripts/init.sql)
 
 
 ### 3.1.1 BD e Models (Semana 5)
