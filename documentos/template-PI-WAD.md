@@ -437,6 +437,8 @@ A tela de confirmação exibe os detalhes da reserva (Sala, Data, Horário) para
 
 ### 4.1 Demonstração do Sistema Web 
 
+[Drive com o video de demonstração](https://drive.google.com/drive/folders/1i_LVkiM6RI0ENe0U67Tj0qfsPPWQJM3Z?hl=pt-br )
+
 ### Desenvolvimento do Sistema Web Completo - Edifício Arara Azul
 
 Este seção tem como objetivo descrever e ilustrar o desenvolvimento do sistema web de agendamento de salas de estudo para o Edifício Arara Azul, detalhando as entregas em termos de código e funcionalidades, as tecnologias empregadas e os principais desafios superados.
