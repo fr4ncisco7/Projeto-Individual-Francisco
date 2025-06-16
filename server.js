@@ -10,6 +10,8 @@ app.set('views', path.join(__dirname, 'views'));
 // Configuração para servir arquivos estáticos
 app.use(express.static(__dirname + '/public'));
 
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
+
 
 // Middlewares para leitura de dados do corpo da requisição
 app.use(express.json());

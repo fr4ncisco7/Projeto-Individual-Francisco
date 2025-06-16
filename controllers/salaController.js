@@ -71,7 +71,7 @@ exports.getSalaById = async (req, res) => {
 // Atualizar uma sala
 exports.atualizarSala = async (req, res) => {
     const { id } = req.params;
-    // Apenas nome, capacidade, disponibilidade (sem localizacao)
+    // Apenas nome, capacidade, disponibilidade 
     const { nome, capacidade, disponibilidade } = req.body;
 
     let setClauses = [];

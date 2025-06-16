@@ -14,7 +14,6 @@
       <nav>
         <ul>
           <li><a href="/agendamentos" class="active">Agendamentos</a></li>
-          <li><a href="/perfil">Meu Perfil</a></li>
         </ul>
       </nav>
     </header>
@@ -68,8 +67,10 @@
           </div>
           
           <div class="calendario-footer">
-            <div class="marcador-especial"></div>
-            <div class="marcador-especial"></div>
+            <img src="/images/folha.png" alt="Imagem da folha">
+            <img id="folhinha2" src="/images/folha.png" alt="Imagem da folha">
+            <img id="folhinha3" src="/images/folha.png" alt="Imagem da folha">
+          
           </div>
         </div>
         
@@ -111,8 +112,9 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Variáveis para controlar o mês e ano atual do calendário
-      let mesAtual = 4; // Abril
-      let anoAtual = 2025;
+      const hoje = new Date();
+      let mesAtual = hoje.getMonth() + 1; // Mês atual
+      let anoAtual = hoje.getFullYear(); // Ano atual
       
       // Gerar calendário inicial
       gerarCalendario(mesAtual, anoAtual);
@@ -138,21 +140,44 @@
         gerarCalendario(mesAtual, anoAtual);
       });
       
+      // Selecionar a sala 1 automaticamente ao carregar a página
+      setTimeout(() => {
+        // Selecionar a primeira sala (Sala 1)
+        const salas = document.querySelectorAll('.sala-card');
+        if (salas.length > 0) {
+          // Remover seleção de todas as salas primeiro
+          salas.forEach(sala => sala.classList.remove('selected'));
+          
+          // Selecionar a primeira sala
+          const primeiraSala = salas[0];
+          primeiraSala.classList.add('selected');
+          
+          // Se já tiver um dia selecionado, carregar os horários para a sala 1
+          const diaSelecionado = document.querySelector('.calendario-dia.selected');
+          if (diaSelecionado) {
+            const dia = parseInt(diaSelecionado.textContent);
+            carregarHorariosDisponiveis(dia, mesAtual, anoAtual);
+          }
+        }
+      }, 100); // Pequeno delay para garantir que os elementos foram renderizados
+      
       // Event listeners para seleção de sala
       document.querySelectorAll('.sala-card').forEach(sala => {
         sala.addEventListener('click', () => {
           document.querySelectorAll('.sala-card').forEach(s => s.classList.remove('selected'));
           sala.classList.add('selected');
+          
+          // Recarregar horários para a sala selecionada
+          const diaSelecionado = document.querySelector('.calendario-dia.selected');
+          if (diaSelecionado) {
+            const dia = parseInt(diaSelecionado.textContent);
+            carregarHorariosDisponiveis(dia, mesAtual, anoAtual);
+          }
         });
       });
       
-      // Event listeners para seleção de horário
-      document.querySelectorAll('.horario-btn').forEach(horario => {
-        horario.addEventListener('click', () => {
-          document.querySelectorAll('.horario-btn').forEach(h => h.classList.remove('selected'));
-          horario.classList.add('selected');
-        });
-      });
+      // NOVO: A linha carregarHorariosDisponiveis(0, 0, 0); foi removida/comentada
+      // Pois o dia atual será selecionado automaticamente e isso disparará o carregamento dos horários.
       
       // Event listener para botão continuar
       document.getElementById('btn-continuar').addEventListener('click', () => {
@@ -161,7 +186,8 @@
         const horarioSelected = document.querySelector('.horario-btn.selected');
         
         if (!salaSelected || !diaSelected || !horarioSelected) {
-          alert('Por favor, selecione uma sala, um dia e um horário.');
+          // NOVO: Substituição de alert() por uma mensagem na tela para melhor UX
+          exibirMensagemErro('Por favor, selecione uma sala, um dia e um horário.');
           return;
         }
         
@@ -195,6 +221,11 @@
       const totalDias = ultimoDia.getDate();
       const primeiroDiaSemana = primeiroDia.getDay();
       
+      // NOVO: Variáveis para controlar se o dia atual já foi marcado para seleção automática
+      let diaAtualElemento = null;
+      const hoje = new Date();
+      const isMesAnoAtual = (hoje.getMonth() + 1 === mes && hoje.getFullYear() === ano);
+
       // Adicionar espaços vazios para os dias antes do primeiro dia do mês
       for (let i = 0; i < primeiroDiaSemana; i++) {
         const diaVazio = document.createElement('div');
@@ -208,37 +239,40 @@
         diaElement.className = 'calendario-dia';
         diaElement.textContent = i;
         
-        // Verificar disponibilidade
+        // Verificar disponibilidade (chamada ao backend simulada por enquanto)
         const disponivel = verificarDisponibilidade(i, mes, ano);
         if (!disponivel) {
           diaElement.classList.add('indisponivel');
           diaElement.title = 'Indisponível para agendamento';
+          diaElement.classList.add('horario-btn.indisponivel')
         } else {
           // Adicionar evento de clique apenas para dias disponíveis
           diaElement.addEventListener('click', () => {
             document.querySelectorAll('.calendario-dia').forEach(d => d.classList.remove('selected'));
             diaElement.classList.add('selected');
+            
+            // Carregar horários disponíveis para o dia selecionado
+            carregarHorariosDisponiveis(i, mes, ano);
           });
         }
         
-        // Verificar se é o dia atual (para destacar)
-        const hoje = new Date();
-        if (hoje.getDate() === i && hoje.getMonth() === mes - 1 && hoje.getFullYear() === ano) {
-          diaElement.classList.add('hoje');
+        // NOVO: Lógica para destacar e selecionar automaticamente o dia atual
+        if (isMesAnoAtual && hoje.getDate() === i) {
+          diaElement.classList.add('hoje'); // Estilo para o dia atual
+          diaElement.classList.add('selected'); // Selecionar automaticamente
+          diaAtualElemento = diaElement; // Armazenar referência para simular clique
         }
         
         diasContainer.appendChild(diaElement);
       }
-      
-      // Se for o mês de abril de 2025, selecionar o dia 28 por padrão (conforme a imagem)
-      if (mes === 4 && ano === 2025) {
-        const dia28 = diasContainer.children[primeiroDiaSemana + 28 - 1];
-        if (dia28) {
-          dia28.classList.add('selected');
-        }
+
+      // NOVO: Se o mês e ano atual estão sendo exibidos, simular clique no dia de hoje
+      // Isso força o carregamento dos horários disponíveis para o dia atual ao carregar a página.
+      if (diaAtualElemento) {
+        diaAtualElemento.click(); // Simula o clique para carregar horários e marcar
       }
     }
-    
+
     // Função para obter o nome do mês a partir do número
     function getNomeMes(numeroMes) {
       const meses = [
@@ -251,20 +285,89 @@
 
     // Função para verificar se um dia está disponível para agendamento
     function verificarDisponibilidade(dia, mes, ano) {
-      // Aqui você implementaria a lógica para verificar no backend
-      // se o dia está disponível para agendamento
+      // Verificar se a data já passou
+      const hoje = new Date();
+      const dataVerificar = new Date(ano, mes - 1, dia);
       
-      // Por enquanto, vamos simular alguns dias indisponíveis
-      const diasIndisponiveis = [
-        { dia: 15, mes: 4, ano: 2025 },
-        { dia: 16, mes: 4, ano: 2025 },
-        { dia: 25, mes: 4, ano: 2025 }
-      ];
+      // Se a data for anterior a hoje, não permite agendamento
+      if (dataVerificar < new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate())) {
+        return false;
+      }
       
-      // Verificar se o dia está na lista de indisponíveis
-      return !diasIndisponiveis.some(data => 
-        data.dia === dia && data.mes === mes && data.ano === ano
-      );
+      // Aqui faríamos uma chamada ao backend para verificar disponibilidade
+      // Por enquanto, vamos simular com dados estáticos. 
+      // Em uma implementação real, você faria um fetch para o seu endpoint /verificarDisponibilidade
+      return true;
+    }
+
+    // Função para verificar se um horário está disponível para uma data específica
+    function verificarHorarioDisponivel(hora, dia, mes, ano) {
+      const hoje = new Date();
+      const dataHoraVerificar = new Date(ano, mes - 1, dia, hora);
+      const dataVerificar = new Date(ano, mes - 1, dia);
+      const dataHoje = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
+      
+      // Se a data for anterior a hoje, não está disponível
+      if (dataVerificar < dataHoje) {
+        return false;
+      }
+      
+      // Se a data for hoje, verificar se o horário já passou
+      if (
+        dataVerificar.getTime() === dataHoje.getTime() && 
+        hora <= hoje.getHours()
+      ) {
+        return false;
+      }
+      
+      // Se a data for futura, o horário está disponível (independente da hora)
+      // Em uma implementação real, você faria um fetch para o seu endpoint /verificarDisponibilidade
+      // passando sala_id, data, e hora, para checar a disponibilidade real do slot.
+      return true;
+    }
+
+    // Função para carregar horários disponíveis para o dia selecionado
+    function carregarHorariosDisponiveis(dia, mes, ano) {
+      const horariosContainer = document.querySelector('.horarios-opcoes');
+      horariosContainer.innerHTML = '';
+      
+      // Horários possíveis (em blocos de 4 horas)
+      const horariosPossiveis = [0, 4, 8, 12, 16, 20];
+      
+      horariosPossiveis.forEach(hora => {
+        const disponivel = verificarHorarioDisponivel(hora, dia, mes, ano);
+        
+        const horarioBtn = document.createElement('button');
+        horarioBtn.className = 'horario-btn';
+        horarioBtn.textContent = `${hora.toString().padStart(2, '0')}:00`;
+        
+        if (!disponivel) {
+          horarioBtn.classList.add('indisponivel');
+          horarioBtn.disabled = true;
+          horarioBtn.title = 'Horário indisponível';
+        } else {
+          horarioBtn.addEventListener('click', () => {
+            document.querySelectorAll('.horario-btn').forEach(h => h.classList.remove('selected'));
+            horarioBtn.classList.add('selected');
+          });
+        }
+        
+        horariosContainer.appendChild(horarioBtn);
+      });
+    }
+
+    // NOVO: Função para exibir mensagem de erro (substitui o alert())
+    function exibirMensagemErro(mensagem) {
+      // Você pode criar um modal, um toast, ou uma div simples para exibir a mensagem
+      const mensagemDiv = document.createElement('div');
+      mensagemDiv.className = 'mensagem-erro'; // Adiciona classe para estilização (CSS precisa ser definido em agendamento.css)
+      mensagemDiv.textContent = mensagem;
+      
+      document.body.appendChild(mensagemDiv);
+
+      setTimeout(() => {
+        mensagemDiv.remove();
+      }, 3000); // Remove a mensagem após 3 segundos
     }
   </script>
 </body>

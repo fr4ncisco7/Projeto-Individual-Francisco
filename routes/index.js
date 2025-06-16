@@ -57,14 +57,12 @@ router.put('/salas/:id', SalaController.atualizarSala);
 router.delete('/salas/:id', SalaController.excluirSala);
 
 // Rotas para o CRUD de Agendamentos
-router.post('/agendamentos', AgendamentoController.criarAgendamento);
-router.get('/agendamentos', AgendamentoController.listarAgendamentos);
-router.get('/agendamentos/:id', AgendamentoController.getAgendamentoById);
-router.put('/agendamentos/:id', AgendamentoController.atualizarAgendamento);
-router.delete('/agendamentos/:id', AgendamentoController.excluirAgendamento);
-
-// Rota de API para criar agendamento
+router.get('/api/agendamentos/verificar-disponibilidade', AgendamentoController.verificarDisponibilidade);
+router.get('/api/agendamentos/:id', AgendamentoController.getAgendamentoById);
+router.get('/api/agendamentos', AgendamentoController.listarAgendamentos);
 router.post('/api/agendamentos', AgendamentoController.criarAgendamento);
+router.put('/api/agendamentos/:id', AgendamentoController.atualizarAgendamento);
+router.delete('/api/agendamentos/:id', AgendamentoController.excluirAgendamento);
 
 module.exports = router;
 

@@ -34,21 +34,95 @@ function calcularDataFim(dataInicio) {
   return dataFim;
 }
 
+// Verificar disponibilidade de uma sala em uma data/hora específica
+exports.verificarDisponibilidade = async (req, res) => {
+  try {
+    const { sala_id, data, hora } = req.query;
+    
+    console.log('Verificando disponibilidade:', { sala_id, data, hora });
+    
+    if (!sala_id || !data || hora === undefined) {
+      return res.status(400).json({ error: 'Sala, data e hora são obrigatórios para verificar disponibilidade.' });
+    }
+    
+    // Converter para objetos Date
+    const dataHoraInicio = new Date(`${data}T${hora.toString().padStart(2, '0')}:00:00`);
+    const dataHoraFim = new Date(dataHoraInicio);
+    dataHoraFim.setHours(dataHoraFim.getHours() + 4); // Bloco de 4 horas
+    
+    console.log('Data/hora início:', dataHoraInicio);
+    console.log('Data/hora fim:', dataHoraFim);
+    
+    // Verificar se a data/hora já passou
+    const agora = new Date();
+    
+    // Verificar se a data é hoje e se o horário já passou
+    if (
+      dataHoraInicio.getDate() === agora.getDate() && 
+      dataHoraInicio.getMonth() === agora.getMonth() && 
+      dataHoraInicio.getFullYear() === agora.getFullYear() && 
+      parseInt(hora) <= agora.getHours()
+    ) {
+      console.log('Horário já passou');
+      return res.json({ disponivel: false, motivo: 'horario_passado' });
+    }
+    
+    // Verificar se a data é anterior a hoje
+    const hoje = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
+    const dataVerificar = new Date(dataHoraInicio.getFullYear(), dataHoraInicio.getMonth(), dataHoraInicio.getDate());
+    
+    if (dataVerificar < hoje) {
+      console.log('Data já passou');
+      return res.json({ disponivel: false, motivo: 'data_passada' });
+    }
+    
+    // Verificar se já existe agendamento para esta sala neste horário
+    const query = `
+      SELECT * FROM agendamentos 
+      WHERE sala_id = $1 
+      AND (
+        (data_inicio <= $2 AND data_fim > $2) OR
+        (data_inicio < $3 AND data_fim >= $3) OR
+        (data_inicio >= $2 AND data_fim <= $3)
+      )
+    `;
+    
+    const result = await pool.query(query, [sala_id, dataHoraInicio, dataHoraFim]);
+    console.log('Agendamentos encontrados:', result.rows.length);
+    
+    // Se encontrou algum agendamento, a sala não está disponível
+    const disponivel = result.rows.length === 0;
+    
+    console.log('Disponibilidade:', disponivel);
+    
+    return res.json({ 
+      disponivel, 
+      motivo: disponivel ? null : 'sala_ocupada' 
+    });
+  } catch (error) {
+    console.error('Erro ao verificar disponibilidade:', error);
+    return res.status(500).json({ error: 'Erro ao verificar disponibilidade.' });
+  }
+};
+
 // Criar um novo agendamento
 exports.criarAgendamento = async (req, res) => {
   try {
-    const { sala_id, data_inicio, titulo, descricao } = req.body;
-    const usuario_id = req.session?.usuario?.id || 1; // Usar ID do usuário da sessão ou um padrão para testes
+    console.log('Dados recebidos para criar agendamento:', req.body);
     
-    // Validações básicas
-    if (!usuario_id || !sala_id || !data_inicio || !titulo) {
-      return res.status(400).json({ 
-        error: 'Dados incompletos. Usuário, sala, data de início e título são obrigatórios.' 
-      });
-    }
+    const { sala_id, data_inicio, descricao } = req.body;
+    // Usar ID do usuário da sessão ou um padrão para testes
+    const usuario_id = req.session?.usuario?.id || 1;
     
+    console.log('Processando agendamento para usuário:', usuario_id);
+    
+   
     // Extrair a hora da data_inicio
-    const hora = new Date(data_inicio).getHours();
+    const dataInicioObj = new Date(data_inicio);
+    const hora = dataInicioObj.getHours();
+    
+    console.log('Data de início:', dataInicioObj);
+    console.log('Hora:', hora);
     
     // Validar se a hora está em blocos de 4 horas (00, 04, 08, 12, 16, 20)
     if (![0, 4, 8, 12, 16, 20].includes(hora)) {
@@ -57,36 +131,65 @@ exports.criarAgendamento = async (req, res) => {
       });
     }
     
+    // Verificar se a data/hora já passou
+    const agora = new Date();
+    const hoje = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
+    const dataAgendamento = new Date(dataInicioObj.getFullYear(), dataInicioObj.getMonth(), dataInicioObj.getDate());
+    
+    // Se a data for anterior a hoje, não permite
+    if (dataAgendamento < hoje) {
+      return res.status(400).json({ error: 'Não é possível agendar para uma data que já passou.' });
+    }
+    
+    // Se a data for hoje, verificar se o horário já passou
+    if (
+      dataAgendamento.getTime() === hoje.getTime() && 
+      hora <= agora.getHours()
+    ) {
+      return res.status(400).json({ error: 'Não é possível agendar para um horário que já passou.' });
+    }
+    
     // Calcular data de fim (4 horas após o início)
-    const dataInicio = new Date(data_inicio);
-    const dataFim = new Date(dataInicio);
+    const dataFim = new Date(dataInicioObj);
     dataFim.setHours(dataFim.getHours() + 4);
     
-    // Verificar disponibilidade e criar o agendamento
-    // ... (código de verificação de disponibilidade)
+    console.log('Data de fim:', dataFim);
+    
+    // Verificar disponibilidade
+    const query = `
+      SELECT * FROM agendamentos 
+      WHERE sala_id = $1 
+      AND (
+        (data_inicio <= $2 AND data_fim > $2) OR
+        (data_inicio < $3 AND data_fim >= $3) OR
+        (data_inicio >= $2 AND data_fim <= $3)
+      )
+    `;
+    
+    const result = await pool.query(query, [sala_id, dataInicioObj, dataFim]);
+    
+    // Se encontrou algum agendamento, a sala não está disponível
+    if (result.rows.length > 0) {
+      return res.status(400).json({ error: 'Esta sala já está agendada para o horário selecionado.' });
+    }
     
     // Criar o agendamento
-    const novoAgendamento = {
-      usuario_id,
-      sala_id,
-      data_inicio: dataInicio,
-      data_fim: dataFim,
-      titulo,
-      descricao
-    };
+    const insertQuery = `
+      INSERT INTO agendamentos (usuario_id, sala_id, data_inicio, data_fim, descricao)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *
+    `;
     
-    // Aqui você inseriria no banco de dados
-    // const result = await db.query(...);
+    const novoAgendamento = await pool.query(insertQuery, [
+      usuario_id, sala_id, dataInicioObj, dataFim, descricao
+    ]);
     
-    // Para teste, apenas retornamos sucesso
-    return res.status(201).json({
-      success: true,
-      message: 'Agendamento criado com sucesso',
-      agendamento: novoAgendamento
-    });
+    console.log('Agendamento criado com sucesso:', novoAgendamento.rows[0]);
+    
+    return res.status(201).json(novoAgendamento.rows[0]);
   } catch (error) {
     console.error('Erro ao criar agendamento:', error);
-    return res.status(500).json({ error: 'Erro interno do servidor' });
+    return res.status(500).json({ error: 'Erro ao criar agendamento: ' + error.message });
   }
 };
 
@@ -96,15 +199,15 @@ exports.listarAgendamentos = async (req, res) => {
         const query = `
             SELECT
                 a.id,
-                a.usuarios_id,
-                a.data_hora_inicio,
-                a.data_hora_fim,
+                a.usuario_id,
+                a.data_inicio,
+                a.data_fim,
                 json_agg(json_build_object('id', s.id, 'nome', s.nome)) AS salas_agendadas
             FROM agendamentos a
             LEFT JOIN salas_agendamentos sa ON a.id = sa.agendamentos_id -- 'agendamentos_id' aqui
             LEFT JOIN salas s ON sa.salas_id = s.id -- 'salas_id' aqui
             GROUP BY a.id
-            ORDER BY a.data_hora_inicio;
+            ORDER BY a.data_inicio;
         `;
         const result = await pool.query(query);
         res.status(200).json(result.rows);
@@ -121,9 +224,9 @@ exports.getAgendamentoById = async (req, res) => {
         const query = `
             SELECT
                 a.id,
-                a.usuarios_id,
-                a.data_hora_inicio,
-                a.data_hora_fim,
+                a.usuario_id,
+                a.data_inicio,
+                a.data_fim,
                 json_agg(json_build_object('id', s.id, 'nome', s.nome)) AS salas_agendadas
             FROM agendamentos a
             LEFT JOIN salas_agendamentos sa ON a.id = sa.agendamentos_id
@@ -229,9 +332,9 @@ exports.atualizarAgendamento = async (req, res) => {
         const updatedAgendamento = await client.query(`
             SELECT
                 a.id,
-                a.usuarios_id,
-                a.data_hora_inicio,
-                a.data_hora_fim,
+                a.usuario_id,
+                a.data_inicio,
+                a.data_fim,
                 json_agg(json_build_object('id', s.id, 'nome', s.nome)) AS salas_agendadas
             FROM agendamentos a
             LEFT JOIN salas_agendamentos sa ON a.id = sa.agendamentos_id
